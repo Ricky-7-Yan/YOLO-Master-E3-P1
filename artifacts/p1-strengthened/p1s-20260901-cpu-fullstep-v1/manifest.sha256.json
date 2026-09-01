@@ -1,0 +1,62 @@
+[
+  {
+    "path": "capture-schema-samples.jsonl",
+    "bytes": 64191,
+    "sha256": "6fa15880a071c83869baaacb4a6c2029190d2f1c3921a5385b0beeedd697f7a0"
+  },
+  {
+    "path": "command.txt",
+    "bytes": 105,
+    "sha256": "0ee3fe08e4475715da3653eb7b1cafb0e5ee041f8228a202e56cd3d0e66f2762"
+  },
+  {
+    "path": "config.resolved.yaml",
+    "bytes": 1044,
+    "sha256": "74e75bd23d83a71f6e1c90313975230e943830b78592bcee1341b33f0857b8f6"
+  },
+  {
+    "path": "environment.json",
+    "bytes": 1049,
+    "sha256": "65d09c828ce8816a4ea038e4d0e4fe7edbdc04a9836a7e885fdef7a623c1d5cb"
+  },
+  {
+    "path": "full.log",
+    "bytes": 695,
+    "sha256": "b1f287ccea1efcfd8f9b97929e68e39bc922c7e47cbe6825eb41d7fa50a4633b"
+  },
+  {
+    "path": "fullstep-layered-overhead.png",
+    "bytes": 95451,
+    "sha256": "556e35dda6a27be98b0516f82f939228838ca948017be65726fb483b20519711"
+  },
+  {
+    "path": "fullstep-pairs.jsonl",
+    "bytes": 252964,
+    "sha256": "389c9797cdbd6f1f3fedcdb2de2da0acae059836c2bff1ae226c9e8ec0783ad4"
+  },
+  {
+    "path": "input.json",
+    "bytes": 3155,
+    "sha256": "e41a9093fd1c34b189a541f3bea81169dec1ec592e9d5ad69bc4dbe1f0bd8865"
+  },
+  {
+    "path": "summary.json",
+    "bytes": 13895,
+    "sha256": "aeb611a537164f3bece066083153558d0b1bc366d9a43de6f5f70cf5acae48b7"
+  },
+  {
+    "path": "writer-events-latent.jsonl",
+    "bytes": 631568,
+    "sha256": "bb8d0a921d9a424833351a8f9bd31f9e1438819070b9eb42490cee7fdaec4746"
+  },
+  {
+    "path": "writer-events-moe.jsonl",
+    "bytes": 822043,
+    "sha256": "08203b4313f5d476b2a42a24773f8099b0a3e7a4f44d0467ecf5c1dba353f25a"
+  },
+  {
+    "path": "writer-events-mot.jsonl",
+    "bytes": 1086187,
+    "sha256": "6cfb79e20033d69c95749e61c71c58911893cc8b044bc9974f4aa4293745f0ab"
+  }
+]

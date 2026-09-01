@@ -1,0 +1,5 @@
+2026-09-01 23:46:21,756 | INFO | scope=E3 P1 strengthened full detection step device=cpu batches=2 batch=2 imgsz=64
+2026-09-01 23:50:43,823 | INFO | family=moe status=PASS strength=STRONG full_median=2.113% ci95=[-2.514, 8.361] pairs=30
+2026-09-01 23:54:49,646 | INFO | family=mot status=PASS strength=STRONG full_median=-0.050% ci95=[-6.374, 9.451] pairs=48
+2026-09-02 00:00:35,358 | INFO | family=latent status=PASS strength=STRONG full_median=-5.741% ci95=[-16.195, 1.570] pairs=30
+2026-09-02 00:00:36,483 | INFO | result=PASS evidence_strength=STRONG artifacts=C:\Users\23145\Desktop\腾讯犀牛鸟\实战阶段\YOLO-Master-E3-P1\artifacts\p1-strengthened\p1s-20260901-cpu-fullstep-v1

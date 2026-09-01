@@ -1,0 +1,1 @@
+python -m e3_p1.strengthened --config configs/p1_strengthened.yaml --run-id p1s-20260901-cpu-fullstep-v1

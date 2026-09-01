@@ -39,3 +39,11 @@
 - collector 改为 family 全程保留事件，容量提升到 4096，并新增事件总数和 `0..N-1` 连续序号 hard-fail。
 - 第三次 MoT 预检通过：两个观察条件均得到 48 条事件、序号 0 至 47 且无重复；状态标记为 `PREFLIGHT_COMPLETE`、`formal_verdict_eligible=false`。
 - 正式模式若任一 family 主中位数不满足 `<10%`，会在写完 summary、failure、日志与 manifest 后非零退出，不更新 `LATEST.txt`。
+
+## 加强正式验证
+
+- 从冻结源码 commit 执行三族正式加强运行，计时纳入真实检测 loss、backward、梯度裁剪、官方分组 SGD step 和逐 step JSONL 写入/flush。
+- MoE 30 对中位 slowdown `2.113%`、95% CI `[-2.514%, 8.361%]`；MoT 48 对 `-0.050%`、`[-6.374%, 9.451%]`；Latent 30 对 `-5.741%`、`[-16.195%, 1.570%]`。
+- 三族主中位数和 CI 上界均低于 10%，总状态为 `PASS / STRONG`；负值不作加速解释。
+- 108 个正式 pair 的 loss、梯度、模型参数和 optimizer 状态等价；两个观察条件的事件数与全局连续序号均通过 hard-fail。
+- writer 事件为 MoE 432、MoT 432、Latent 216，共 1,080 条；12 项正式证据 manifest 独立重算 0 mismatch。

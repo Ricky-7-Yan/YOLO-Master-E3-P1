@@ -1,0 +1,420 @@
+{
+  "status": "PASS",
+  "criterion_preview": null,
+  "formal_verdict_eligible": true,
+  "execution_mode": "formal",
+  "evidence_strength": "STRONG",
+  "scope": "E3 P1 strengthened real detection-loss/backward/optimizer paired benchmark",
+  "run_id": "p1s-20260901-cpu-fullstep-v1",
+  "official_runtime_ref": "07d330325b5a26b75aabfc75389f9bcbc0d40245",
+  "official_runtime_tree": "e4a900338bd6679d5ad9f8673e466b250ba2c711",
+  "families": {
+    "moe": {
+      "status": "PASS",
+      "evidence_strength": "STRONG",
+      "model_config": "ultralytics/cfg/models/26/yolo26-master-n.yaml",
+      "model_parameters": 5115336,
+      "registered_modules": [
+        "model.4.m.0.0.mlp",
+        "model.4.m.0.1.mlp",
+        "model.6.m.0.0.mlp",
+        "model.6.m.0.1.mlp",
+        "model.8.m.0.0.mlp",
+        "model.8.m.0.1.mlp"
+      ],
+      "measured_pairs": 30,
+      "steps_per_condition": 60,
+      "order_position_balance": {
+        "off": [
+          10,
+          10,
+          10
+        ],
+        "capture": [
+          10,
+          10,
+          10
+        ],
+        "capture_jsonl": [
+          10,
+          10,
+          10
+        ]
+      },
+      "initial_model_state_sha256": {
+        "off": "5bd743f30559a6f38734772272fe02f67e07e40fead55dda8f350008ddffa09e",
+        "capture": "5bd743f30559a6f38734772272fe02f67e07e40fead55dda8f350008ddffa09e",
+        "capture_jsonl": "5bd743f30559a6f38734772272fe02f67e07e40fead55dda8f350008ddffa09e"
+      },
+      "initial_optimizer_state_sha256": {
+        "off": "a39cdf3f338b77631097268e490cf4e90108e4dcaddd0d8849debe02b1147579",
+        "capture": "a39cdf3f338b77631097268e490cf4e90108e4dcaddd0d8849debe02b1147579",
+        "capture_jsonl": "a39cdf3f338b77631097268e490cf4e90108e4dcaddd0d8849debe02b1147579"
+      },
+      "loss_gradient_and_state_equivalence": "PASS",
+      "event_stream_validation": {
+        "capture": {
+          "expected_count": 432,
+          "actual_count": 432,
+          "first_sequence": 0,
+          "last_sequence": 431,
+          "contiguous_from_zero": true
+        },
+        "capture_jsonl": {
+          "expected_count": 432,
+          "actual_count": 432,
+          "first_sequence": 0,
+          "last_sequence": 431,
+          "contiguous_from_zero": true
+        }
+      },
+      "hooks_removed": true,
+      "condition_ms": {
+        "off": {
+          "mean": 2314.660756639205,
+          "median": 2204.0293500758708,
+          "std": 466.71441020741497,
+          "min": 1801.6535001806915,
+          "max": 4107.71150002256
+        },
+        "capture": {
+          "mean": 2289.9593599839136,
+          "median": 2194.508049986325,
+          "std": 356.2572804554479,
+          "min": 1723.2667999342084,
+          "max": 3265.0348998140544
+        },
+        "capture_jsonl": {
+          "mean": 2348.8207333566,
+          "median": 2245.166049920954,
+          "std": 462.6910313435838,
+          "min": 1683.5568000096828,
+          "max": 3566.8663000687957
+        }
+      },
+      "comparisons": {
+        "capture_vs_off_percent": {
+          "mean": 1.3263420615633372,
+          "median": -1.8997811561561107,
+          "std": 21.28276398240906,
+          "min": -34.42658034291055,
+          "max": 81.2243530449444,
+          "bootstrap_95_ci": [
+            -5.795663809014838,
+            4.288512368829858
+          ],
+          "task_status": "PASS",
+          "evidence_strength": "STRONG"
+        },
+        "capture_jsonl_vs_off_percent": {
+          "mean": 3.3927974031719303,
+          "median": 2.1125750665194567,
+          "std": 20.930603527792268,
+          "min": -41.49762708669938,
+          "max": 51.09073214197668,
+          "bootstrap_95_ci": [
+            -2.51361077821152,
+            8.360762825123814
+          ],
+          "task_status": "PASS",
+          "evidence_strength": "STRONG"
+        },
+        "writer_increment_vs_capture_percent": {
+          "mean": 4.792378788028587,
+          "median": -1.1174222207399698,
+          "std": 25.02125298392625,
+          "min": -46.11620536717295,
+          "max": 54.74206882803081,
+          "bootstrap_95_ci": [
+            -10.26717938044879,
+            15.396633391158522
+          ],
+          "task_status": "PASS",
+          "evidence_strength": "INCONCLUSIVE"
+        }
+      },
+      "primary_rule": "capture_jsonl vs off paired median slowdown must be below target",
+      "target_slowdown_percent": 10.0
+    },
+    "mot": {
+      "status": "PASS",
+      "evidence_strength": "STRONG",
+      "model_config": "ultralytics/cfg/models/26/yolo26-master-mot-n.yaml",
+      "model_parameters": 2927512,
+      "registered_modules": [
+        "model.13.m.0",
+        "model.16.m.0",
+        "model.19.m.0",
+        "model.22.m.0"
+      ],
+      "measured_pairs": 48,
+      "steps_per_condition": 96,
+      "order_position_balance": {
+        "off": [
+          16,
+          16,
+          16
+        ],
+        "capture": [
+          16,
+          16,
+          16
+        ],
+        "capture_jsonl": [
+          16,
+          16,
+          16
+        ]
+      },
+      "initial_model_state_sha256": {
+        "off": "a0578037c1a3989d917a5102f68738fb2a63d1e764c264e21805086e937ec466",
+        "capture": "a0578037c1a3989d917a5102f68738fb2a63d1e764c264e21805086e937ec466",
+        "capture_jsonl": "a0578037c1a3989d917a5102f68738fb2a63d1e764c264e21805086e937ec466"
+      },
+      "initial_optimizer_state_sha256": {
+        "off": "0183134db39fa4b2f4ca596ef69afa8c7684720077089c39cab1f3ca3d4a9514",
+        "capture": "0183134db39fa4b2f4ca596ef69afa8c7684720077089c39cab1f3ca3d4a9514",
+        "capture_jsonl": "0183134db39fa4b2f4ca596ef69afa8c7684720077089c39cab1f3ca3d4a9514"
+      },
+      "loss_gradient_and_state_equivalence": "PASS",
+      "event_stream_validation": {
+        "capture": {
+          "expected_count": 432,
+          "actual_count": 432,
+          "first_sequence": 0,
+          "last_sequence": 431,
+          "contiguous_from_zero": true
+        },
+        "capture_jsonl": {
+          "expected_count": 432,
+          "actual_count": 432,
+          "first_sequence": 0,
+          "last_sequence": 431,
+          "contiguous_from_zero": true
+        }
+      },
+      "hooks_removed": true,
+      "condition_ms": {
+        "off": {
+          "mean": 1483.226031268714,
+          "median": 1239.0627501299605,
+          "std": 632.1382331256216,
+          "min": 983.8632002938539,
+          "max": 3873.474200023338
+        },
+        "capture": {
+          "mean": 1472.6214166730642,
+          "median": 1350.7632499095052,
+          "std": 706.2250454240144,
+          "min": 946.4612998999655,
+          "max": 5602.677999762818
+        },
+        "capture_jsonl": {
+          "mean": 1543.408472944672,
+          "median": 1280.1132500171661,
+          "std": 787.8264853359522,
+          "min": 942.0392999891192,
+          "max": 4864.434000104666
+        }
+      },
+      "comparisons": {
+        "capture_vs_off_percent": {
+          "mean": 3.1370272415504665,
+          "median": -0.04622391838939516,
+          "std": 27.704679458131924,
+          "min": -58.730154961229296,
+          "max": 85.99267496521398,
+          "bootstrap_95_ci": [
+            -6.67295660638485,
+            3.8227664582587035
+          ],
+          "task_status": "PASS",
+          "evidence_strength": "STRONG"
+        },
+        "capture_jsonl_vs_off_percent": {
+          "mean": 9.560615876047232,
+          "median": -0.050146816907284425,
+          "std": 46.767041991819994,
+          "min": -67.70967262267831,
+          "max": 211.0992486995186,
+          "bootstrap_95_ci": [
+            -6.374483356020243,
+            9.450802235851995
+          ],
+          "task_status": "PASS",
+          "evidence_strength": "STRONG"
+        },
+        "writer_increment_vs_capture_percent": {
+          "mean": 8.504850069466963,
+          "median": -1.493041628691334,
+          "std": 44.84729808928421,
+          "min": -40.886131187424226,
+          "max": 188.00983606691108,
+          "bootstrap_95_ci": [
+            -8.665578337349308,
+            3.02174532176286
+          ],
+          "task_status": "PASS",
+          "evidence_strength": "STRONG"
+        }
+      },
+      "primary_rule": "capture_jsonl vs off paired median slowdown must be below target",
+      "target_slowdown_percent": 10.0
+    },
+    "latent": {
+      "status": "PASS",
+      "evidence_strength": "STRONG",
+      "model_config": "ultralytics/cfg/models/26/yolo26-master-latent-n.yaml",
+      "model_parameters": 5478423,
+      "registered_modules": [
+        "model.23",
+        "model.24",
+        "model.25"
+      ],
+      "measured_pairs": 30,
+      "steps_per_condition": 60,
+      "order_position_balance": {
+        "off": [
+          10,
+          10,
+          10
+        ],
+        "capture": [
+          10,
+          10,
+          10
+        ],
+        "capture_jsonl": [
+          10,
+          10,
+          10
+        ]
+      },
+      "initial_model_state_sha256": {
+        "off": "e1619ed32d8671beae29799a9c027c6dbda78a7b68fd2a2e1426cf887f969ab3",
+        "capture": "e1619ed32d8671beae29799a9c027c6dbda78a7b68fd2a2e1426cf887f969ab3",
+        "capture_jsonl": "e1619ed32d8671beae29799a9c027c6dbda78a7b68fd2a2e1426cf887f969ab3"
+      },
+      "initial_optimizer_state_sha256": {
+        "off": "6a3ceebffaf98b2c392362a8631fca721a046625d112c02b8c23487a26fcfdc4",
+        "capture": "6a3ceebffaf98b2c392362a8631fca721a046625d112c02b8c23487a26fcfdc4",
+        "capture_jsonl": "6a3ceebffaf98b2c392362a8631fca721a046625d112c02b8c23487a26fcfdc4"
+      },
+      "loss_gradient_and_state_equivalence": "PASS",
+      "event_stream_validation": {
+        "capture": {
+          "expected_count": 216,
+          "actual_count": 216,
+          "first_sequence": 0,
+          "last_sequence": 215,
+          "contiguous_from_zero": true
+        },
+        "capture_jsonl": {
+          "expected_count": 216,
+          "actual_count": 216,
+          "first_sequence": 0,
+          "last_sequence": 215,
+          "contiguous_from_zero": true
+        }
+      },
+      "hooks_removed": true,
+      "condition_ms": {
+        "off": {
+          "mean": 3095.4495433174693,
+          "median": 2562.3326998902485,
+          "std": 1263.5059700632794,
+          "min": 2089.7009999025613,
+          "max": 8028.7015999201685
+        },
+        "capture": {
+          "mean": 3212.1624766693762,
+          "median": 2785.4514999780804,
+          "std": 1214.446478402828,
+          "min": 2120.387300150469,
+          "max": 7294.0416999626905
+        },
+        "capture_jsonl": {
+          "mean": 2802.5195566937327,
+          "median": 2540.384199935943,
+          "std": 696.0205566759023,
+          "min": 2074.7539999429137,
+          "max": 4318.414299981669
+        }
+      },
+      "comparisons": {
+        "capture_vs_off_percent": {
+          "mean": 11.857727922894723,
+          "median": 1.9251433648374245,
+          "std": 52.46900672698993,
+          "min": -55.38130729744084,
+          "max": 249.04714599374728,
+          "bootstrap_95_ci": [
+            -1.8537472012465517,
+            16.7600721270189
+          ],
+          "task_status": "PASS",
+          "evidence_strength": "INCONCLUSIVE"
+        },
+        "capture_jsonl_vs_off_percent": {
+          "mean": -2.8706159110017397,
+          "median": -5.741083528426169,
+          "std": 28.6590803570781,
+          "min": -55.70926561448314,
+          "max": 76.33153157572092,
+          "bootstrap_95_ci": [
+            -16.195357264709532,
+            1.5704799630821127
+          ],
+          "task_status": "PASS",
+          "evidence_strength": "STRONG"
+        },
+        "writer_increment_vs_capture_percent": {
+          "mean": -5.5953184080556575,
+          "median": -6.3986290749623915,
+          "std": 29.409853192824578,
+          "min": -67.1027682755774,
+          "max": 54.840664067765275,
+          "bootstrap_95_ci": [
+            -16.256058278117003,
+            5.530142878034839
+          ],
+          "task_status": "PASS",
+          "evidence_strength": "STRONG"
+        }
+      },
+      "primary_rule": "capture_jsonl vs off paired median slowdown must be below target",
+      "target_slowdown_percent": 10.0
+    }
+  },
+  "target_slowdown_percent": 10.0,
+  "methodology": {
+    "conditions": [
+      "off",
+      "capture",
+      "capture_jsonl"
+    ],
+    "order": "six balanced permutations across three conditions",
+    "warmup_pairs": 6,
+    "sample_batches": [
+      [
+        0,
+        1
+      ],
+      [
+        2,
+        3
+      ]
+    ],
+    "timed_region": "zero_grad + real detection loss + backward + gradient clip + SGD step + optional JSONL write/flush",
+    "excluded": "model construction, hook registration/removal, state hashing, schema validation, plotting, dashboard HTTP",
+    "primary_statistic": "median paired capture_jsonl-vs-off slowdown",
+    "uncertainty": "deterministic-seed bootstrap 95% interval for paired median",
+    "task_rule": "each family primary median must be below 10 percent",
+    "strength_rule": "STRONG only when each family bootstrap upper bound is also below 10 percent"
+  },
+  "limitations": [
+    "CPU-only random-initialized models; no NVIDIA CUDA, AMP or multi-epoch convergence claim.",
+    "Images and labels are deterministically preloaded so unrelated file I/O cannot dilute observer slowdown.",
+    "The JSONL condition flushes every step but does not call fsync; dashboard HTTP remains an independent consumer."
+  ]
+}

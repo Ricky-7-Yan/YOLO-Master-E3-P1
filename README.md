@@ -30,6 +30,18 @@ run_p1_dashboard.cmd
 
 ## 当前状态
 
+加强正式运行 `p1s-20260901-cpu-fullstep-v1` 已通过。它使用 4 张 coco8 val 图及真实标签，计时覆盖检测 loss、backward、梯度裁剪、官方分组 SGD step 和逐 step JSONL 写入/flush：
+
+- MoE：30 对，中位 slowdown `2.113%`，95% CI `[-2.514%, 8.361%]`。
+- MoT：48 对，中位 slowdown `-0.050%`，95% CI `[-6.374%, 9.451%]`。
+- Latent：30 对，中位 slowdown `-5.741%`，95% CI `[-16.195%, 1.570%]`。
+- 三族均满足中位数 `<10%`，且区间上界也 `<10%`，总体为 `PASS / STRONG`。
+- 108 对 loss、梯度、模型和 optimizer 轨迹等价；三族 writer 共 1,080 条事件，序号连续；12 项正式文件 manifest 重算无误。
+
+正式加强证据见 [`artifacts/p1-strengthened/p1s-20260901-cpu-fullstep-v1/`](artifacts/p1-strengthened/p1s-20260901-cpu-fullstep-v1/)。负 slowdown 只表示本次 CPU 噪声下未检出正向开销，不能解释为观察器加速。
+
+### 首轮隔离微基准
+
 独立仓库正式运行 `p1-20260901-cpu-split` 已通过：
 
 - 面板 HTTP smoke：`PASS`，读取 P0 的 52 条事件，覆盖 3 个 family、13 个模块。

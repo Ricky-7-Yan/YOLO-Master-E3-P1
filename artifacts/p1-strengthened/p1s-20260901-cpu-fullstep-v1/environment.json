@@ -1,0 +1,25 @@
+{
+  "captured_at": "2026-09-01T23:46:20+08:00",
+  "platform": "Windows-10-10.0.26200-SP0",
+  "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+  "python_executable": "C:\\Users\\23145\\Desktop\\腾讯犀牛鸟\\实战阶段\\YOLO-Master-baseline\\.venv\\Scripts\\python.exe",
+  "torch": "2.13.0+cpu",
+  "ultralytics": "8.4.101",
+  "matplotlib": "3.11.1",
+  "pillow": "12.3.0",
+  "cuda_available": false,
+  "torch_num_threads": 16,
+  "source_root": "C:\\Users\\23145\\Desktop\\腾讯犀牛鸟\\实战阶段\\YOLO-Master-main-07d3303",
+  "configured_official_ref": "07d330325b5a26b75aabfc75389f9bcbc0d40245",
+  "configured_official_tree": "e4a900338bd6679d5ad9f8673e466b250ba2c711",
+  "source_git": {
+    "head": null,
+    "tree": null,
+    "status_short": null
+  },
+  "tool_git": {
+    "head": "fde96eb51176a6e460ed75b5a05077ab675b34bd",
+    "tree": "2eebf50c899f4f42baff1371e330311b51417cd7",
+    "status_short": "?? artifacts/p1-strengthened/p1s-20260901-cpu-fullstep-v1/"
+  }
+}
