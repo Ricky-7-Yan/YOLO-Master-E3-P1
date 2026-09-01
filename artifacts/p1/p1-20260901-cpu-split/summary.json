@@ -1,0 +1,178 @@
+{
+  "status": "PASS",
+  "scope": "E3 P1 realtime dashboard + paired train-path observer-overhead benchmark",
+  "run_id": "p1-20260901-cpu-split",
+  "official_runtime_ref": "07d330325b5a26b75aabfc75389f9bcbc0d40245",
+  "official_runtime_tree": "e4a900338bd6679d5ad9f8673e466b250ba2c711",
+  "families": {
+    "moe": {
+      "status": "PASS",
+      "model_config": "ultralytics/cfg/models/26/yolo26-master-n.yaml",
+      "model_parameters": 5115336,
+      "paired_model_state_sha256": "5bd743f30559a6f38734772272fe02f67e07e40fead55dda8f350008ddffa09e",
+      "registered_modules": [
+        "model.4.m.0.0.mlp",
+        "model.4.m.0.1.mlp",
+        "model.6.m.0.0.mlp",
+        "model.6.m.0.1.mlp",
+        "model.8.m.0.0.mlp",
+        "model.8.m.0.1.mlp"
+      ],
+      "measured_pairs": 30,
+      "order_balance": {
+        "off_then_on": 15,
+        "on_then_off": 15
+      },
+      "off_ms": {
+        "mean": 5492.907093317869,
+        "median": 4583.550650044344,
+        "std": 3536.1604631411938,
+        "min": 2473.0223999358714,
+        "max": 19030.996499815956
+      },
+      "on_ms": {
+        "mean": 5285.46273666434,
+        "median": 4660.785349900834,
+        "std": 3157.1579298209303,
+        "min": 2248.6856000032276,
+        "max": 17187.219599960372
+      },
+      "paired_slowdown_percent": {
+        "mean": -0.05438998437715175,
+        "median": -0.9031339852529746,
+        "std": 22.73029933263447,
+        "min": -42.894713755377715,
+        "max": 61.77174803022216,
+        "bootstrap_95_ci": [
+          -7.986541055895552,
+          8.097435553438654
+        ]
+      },
+      "target_slowdown_percent": 10.0,
+      "target_rule": "PASS when the preregistered median paired slowdown is below the target",
+      "loss_equivalence": "PASS",
+      "hooks_removed": true,
+      "benchmark_scope": "real train-mode model forward + differentiable surrogate backward; optimizer step excluded"
+    },
+    "mot": {
+      "status": "PASS",
+      "model_config": "ultralytics/cfg/models/26/yolo26-master-mot-n.yaml",
+      "model_parameters": 2927512,
+      "paired_model_state_sha256": "a0578037c1a3989d917a5102f68738fb2a63d1e764c264e21805086e937ec466",
+      "registered_modules": [
+        "model.13.m.0",
+        "model.16.m.0",
+        "model.19.m.0",
+        "model.22.m.0"
+      ],
+      "measured_pairs": 30,
+      "order_balance": {
+        "off_then_on": 15,
+        "on_then_off": 15
+      },
+      "off_ms": {
+        "mean": 1698.6630933126435,
+        "median": 1456.3327999785542,
+        "std": 1216.4853226633102,
+        "min": 1021.5289001353085,
+        "max": 7996.662799967453
+      },
+      "on_ms": {
+        "mean": 1508.7588366741936,
+        "median": 1480.8113999897614,
+        "std": 201.0682390075379,
+        "min": 1208.5345000959933,
+        "max": 2064.539900049567
+      },
+      "paired_slowdown_percent": {
+        "mean": 0.7953746561168903,
+        "median": 5.087248072462619,
+        "std": 22.929567167122663,
+        "min": -81.52046251169104,
+        "max": 64.26366398997347,
+        "bootstrap_95_ci": [
+          -5.647821355208142,
+          9.510195675851847
+        ]
+      },
+      "target_slowdown_percent": 10.0,
+      "target_rule": "PASS when the preregistered median paired slowdown is below the target",
+      "loss_equivalence": "PASS",
+      "hooks_removed": true,
+      "benchmark_scope": "real train-mode model forward + differentiable surrogate backward; optimizer step excluded"
+    },
+    "latent": {
+      "status": "PASS",
+      "model_config": "ultralytics/cfg/models/26/yolo26-master-latent-n.yaml",
+      "model_parameters": 5478423,
+      "paired_model_state_sha256": "e1619ed32d8671beae29799a9c027c6dbda78a7b68fd2a2e1426cf887f969ab3",
+      "registered_modules": [
+        "model.23",
+        "model.24",
+        "model.25"
+      ],
+      "measured_pairs": 30,
+      "order_balance": {
+        "off_then_on": 15,
+        "on_then_off": 15
+      },
+      "off_ms": {
+        "mean": 3187.6136533450335,
+        "median": 2987.077399971895,
+        "std": 477.4157062180426,
+        "min": 2717.683200025931,
+        "max": 4481.929900124669
+      },
+      "on_ms": {
+        "mean": 3095.2294166975967,
+        "median": 3026.5104999998584,
+        "std": 287.6007830642339,
+        "min": 2587.6128000672907,
+        "max": 3896.0833998862654
+      },
+      "paired_slowdown_percent": {
+        "mean": -1.2127369995879507,
+        "median": 1.196495315706959,
+        "std": 14.932506876387622,
+        "min": -33.69372369173935,
+        "max": 32.397884363283296,
+        "bootstrap_95_ci": [
+          -5.535737637536763,
+          5.670220179639518
+        ]
+      },
+      "target_slowdown_percent": 10.0,
+      "target_rule": "PASS when the preregistered median paired slowdown is below the target",
+      "loss_equivalence": "PASS",
+      "hooks_removed": true,
+      "benchmark_scope": "real train-mode model forward + differentiable surrogate backward; optimizer step excluded"
+    }
+  },
+  "dashboard": {
+    "status": "PASS",
+    "health_status": 200,
+    "html_contains_dashboard": true,
+    "api_event_count": 52,
+    "api_families": [
+      "latent",
+      "moe",
+      "mot"
+    ]
+  },
+  "target_slowdown_percent": 10.0,
+  "methodology": {
+    "paired_conditions": "identical independently instantiated model states; hook off vs hook on",
+    "order": "alternating AB/BA to reduce order bias",
+    "warmup_pairs": 5,
+    "measured_pairs": 30,
+    "timed_region": "real model train-mode forward plus differentiable surrogate backward",
+    "excluded": "model construction, hook registration/removal, optimizer step, disk serialization, dashboard HTTP",
+    "primary_statistic": "median of per-pair slowdown percentages",
+    "uncertainty": "deterministic-seed bootstrap 95% interval for the paired median"
+  },
+  "limitations": [
+    "This is a training-path microbenchmark, not a full detector epoch benchmark with labels and optimizer updates.",
+    "CPU scheduling noise remains visible; paired AB/BA ordering and bootstrap intervals reduce but do not eliminate it.",
+    "The dashboard is local and read-only; authentication and remote multi-user deployment are outside P1 scope."
+  ]
+}

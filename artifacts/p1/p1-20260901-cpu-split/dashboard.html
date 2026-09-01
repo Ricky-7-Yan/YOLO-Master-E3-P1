@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>YOLO-Master E3 Routing Dashboard</title>
+<style>
+:root{--bg:#08111f;--panel:#101d31;--line:#263a55;--text:#e8f0fa;--muted:#91a4bb;--blue:#4da3ff;--gold:#ffbd59}
+*{box-sizing:border-box} body{margin:0;background:radial-gradient(circle at top,#152944,var(--bg) 48%);color:var(--text);font:14px Inter,Segoe UI,sans-serif}
+main{max-width:1280px;margin:auto;padding:28px} h1{font-size:28px;margin:0 0 6px} .sub{color:var(--muted);margin-bottom:22px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:18px} .card,.panel{background:rgba(16,29,49,.92);border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 12px 36px #0005}
+.value{font-size:28px;font-weight:700;color:var(--blue)} .label{color:var(--muted);margin-top:4px} .grid{display:grid;grid-template-columns:1.25fr .75fr;gap:16px}
+table{width:100%;border-collapse:collapse} th,td{padding:9px;border-bottom:1px solid var(--line);text-align:left} th{color:var(--muted);font-weight:600} .bar{height:8px;background:#223653;border-radius:8px;overflow:hidden;min-width:120px} .fill{height:100%;background:linear-gradient(90deg,var(--blue),#72e2ae)}
+.status{display:inline-flex;align-items:center;gap:7px;color:#72e2ae} .dot{width:8px;height:8px;border-radius:50%;background:#72e2ae;box-shadow:0 0 10px #72e2ae}
+@media(max-width:850px){.grid{grid-template-columns:1fr}}
+</style></head>
+<body><main><h1>YOLO-Master E3 Routing Dashboard</h1><div class="sub"><span class="status"><i class="dot"></i>live</span> · refresh 1000 ms · local read-only observer</div>
+<section id="cards" class="cards"></section><section class="grid"><div class="panel"><h2>Module routing aggregates</h2><table><thead><tr><th>Family</th><th>Module</th><th>Entropy</th><th>Gini</th><th>Dominant</th></tr></thead><tbody id="modules"></tbody></table></div>
+<div class="panel"><h2>Recent events</h2><table><thead><tr><th>Family</th><th>Module</th><th>Samples</th></tr></thead><tbody id="recent"></tbody></table></div></section></main>
+<script>
+const fmt=v=>v==null?'—':Number(v).toFixed(3); const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+async function refresh(){const r=await fetch('/api/snapshot',{cache:'no-store'});const d=await r.json();
+document.querySelector('#cards').innerHTML=`<div class="card"><div class="value">${d.event_count}</div><div class="label">Events in stream</div></div>`+Object.entries(d.families).map(([n,v])=>`<div class="card"><div class="value">${n.toUpperCase()}</div><div class="label">${v.modules} modules · H ${fmt(v.mean_entropy)} · G ${fmt(v.mean_gini)}</div></div>`).join('');
+document.querySelector('#modules').innerHTML=d.aggregates.map(x=>`<tr><td>${esc(x.family.toUpperCase())}</td><td>${esc(x.module)}</td><td><div class="bar"><div class="fill" style="width:${100*x.aggregate_metrics.entropy_normalized}%"></div></div>${fmt(x.aggregate_metrics.entropy_normalized)}</td><td>${fmt(x.aggregate_metrics.load_gini)}</td><td>${fmt(x.aggregate_metrics.dominant_expert_share)}</td></tr>`).join('');
+document.querySelector('#recent').innerHTML=d.recent_events.slice().reverse().map(x=>`<tr><td>${esc((x.family||'').toUpperCase())}</td><td>${esc(x.module)}</td><td>${esc((x.sample_indices||[]).join(','))}</td></tr>`).join('');}
+refresh();setInterval(refresh,1000);
+</script></body></html>

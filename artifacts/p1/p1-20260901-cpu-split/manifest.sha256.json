@@ -1,0 +1,72 @@
+[
+  {
+    "path": "benchmark-pairs.jsonl",
+    "bytes": 26787,
+    "sha256": "fe5b047603ecf202d628365f30d7cd7e134b3545f64e39e368c7ad3e6e4937f6"
+  },
+  {
+    "path": "command.txt",
+    "bytes": 22,
+    "sha256": "8a79cd8a638f2df8a00452a4ed0e83e44fe4f766a9eaacb2d8d72fbbb649a562"
+  },
+  {
+    "path": "config.resolved.yaml",
+    "bytes": 754,
+    "sha256": "062036a223fef65fac5846439afdb2429ebc1b65c975a0fdbd5748e8c460fb4b"
+  },
+  {
+    "path": "dashboard-events.jsonl",
+    "bytes": 111662,
+    "sha256": "ca35ebbb498948a80e8b9450c32579a57d20bbc0787b145d67518c422a904f07"
+  },
+  {
+    "path": "dashboard-realtime.png",
+    "bytes": 77439,
+    "sha256": "d63d8859431ca20c3c50fe563882f1948c9d0432daab9fd3625f006c381c07ba"
+  },
+  {
+    "path": "dashboard-smoke.json",
+    "bytes": 178,
+    "sha256": "8f18721e7f11d47200678f62f7e55417aeef8fe0851f441c25f60de35b7638d0"
+  },
+  {
+    "path": "dashboard-snapshot.json",
+    "bytes": 20875,
+    "sha256": "d7f1b7d8572b89a95e3fed0526b8f2304dbc55bec3866bf8745b2e4765292f17"
+  },
+  {
+    "path": "dashboard-source.json",
+    "bytes": 412,
+    "sha256": "340734420ddcf433ce4fbe0716e2000174474d4e4ffa4dd2499c258103d637d1"
+  },
+  {
+    "path": "dashboard.html",
+    "bytes": 3524,
+    "sha256": "21c6014726010f49ee84d5fd8d6f13e819b34d2d42d3655598dd2f5b0ffe5876"
+  },
+  {
+    "path": "environment.json",
+    "bytes": 1029,
+    "sha256": "53755254bb5b2e6baaae79638dc4dd7a70d47a10921a6f1de1a5cba12a11f2cb"
+  },
+  {
+    "path": "full.log",
+    "bytes": 642,
+    "sha256": "e443158ed2385b6d910586db9e338856b6820d79a838613074c1d03d36461f5f"
+  },
+  {
+    "path": "input.json",
+    "bytes": 1129,
+    "sha256": "68adbd32f36d011cab7a014dfe8a3d3e224f6b7f2253c0e84cb83ba0813b5173"
+  },
+  {
+    "path": "observer-overhead.png",
+    "bytes": 83695,
+    "sha256": "a5577e8abab097fee727224c91a47a2332305fb09f665ded50e233a79c63e310"
+  },
+  {
+    "path": "summary.json",
+    "bytes": 6376,
+    "sha256": "929323aa216745cab6835e1dffa4271a72010ae6f0c421e444197a045762817e"
+  }
+]

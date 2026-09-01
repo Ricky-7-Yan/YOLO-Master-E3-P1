@@ -1,0 +1,5 @@
+2026-09-01 22:25:38,368 | INFO | scope=E3 P1 paired train-path observer benchmark device=cpu batch=2 imgsz=64 warmup=5 measured=30
+2026-09-01 22:31:52,928 | INFO | family=moe status=PASS median_slowdown=-0.903% ci95=[-7.987, 8.097] pairs=30
+2026-09-01 22:33:54,544 | INFO | family=mot status=PASS median_slowdown=5.087% ci95=[-5.648, 9.510] pairs=30
+2026-09-01 22:37:35,821 | INFO | family=latent status=PASS median_slowdown=1.196% ci95=[-5.536, 5.670] pairs=30
+2026-09-01 22:37:39,213 | INFO | result=PASS dashboard=PASS artifacts=C:\Users\23145\Desktop\腾讯犀牛鸟\实战阶段\YOLO-Master-E3-P1\artifacts\p1\p1-20260901-cpu-split

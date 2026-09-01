@@ -27,12 +27,21 @@ run_p1_dashboard.cmd
 
 ## 当前状态
 
-代码、测试与两次失败证据已从混合仓库中独立出来。正式 split-repo 结果将在同一代码 commit 固定后重新运行并写入 `artifacts/p1/`，避免沿用路径归属不清的旧正式产物。
+独立仓库正式运行 `p1-20260901-cpu-split` 已通过：
+
+- 面板 HTTP smoke：`PASS`，读取 P0 的 52 条事件，覆盖 3 个 family、13 个模块。
+- MoE：30 对，AB/BA=15/15，中位成对 slowdown `-0.903%`，bootstrap 95% CI `[-7.987%, 8.097%]`。
+- MoT：30 对，AB/BA=15/15，中位成对 slowdown `5.087%`，bootstrap 95% CI `[-5.648%, 9.510%]`。
+- Latent：30 对，AB/BA=15/15，中位成对 slowdown `1.196%`，bootstrap 95% CI `[-5.536%, 5.670%]`。
+- 90 对 loss 全部等价，所有 hook 均已清理；14 个正式文件已写入 SHA-256 manifest。
+
+负 slowdown 仅表示本次 CPU 噪声下的观测值，不解释为 hook 带来加速。正式证据见 [`artifacts/p1/p1-20260901-cpu-split/`](artifacts/p1/p1-20260901-cpu-split/)。
 
 ## 导航
 
 - [`docs/REQUIREMENTS.md`](docs/REQUIREMENTS.md)：P1 完成口径和统计判据。
 - [`docs/DESIGN.md`](docs/DESIGN.md)：实时 consumer 与 paired benchmark 设计。
+- [`docs/EXPERIMENT_REPORT.md`](docs/EXPERIMENT_REPORT.md)：正式实验结果与证据索引。
 - [`docs/WORK_LOG.md`](docs/WORK_LOG.md)：失败、修复与验证记录。
 - [`docs/LIMITATIONS.md`](docs/LIMITATIONS.md)：当前不能外推的结论。
 - [`configs/p1.yaml`](configs/p1.yaml)：固定实验配置。

@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "health_status": 200,
+  "html_contains_dashboard": true,
+  "api_event_count": 52,
+  "api_families": [
+    "latent",
+    "moe",
+    "mot"
+  ]
+}
