@@ -1,0 +1,3 @@
+2026-08-31 23:10:42,766 | INFO | scope=E3 P1 paired train-path observer benchmark device=cpu batch=2 imgsz=64 warmup=3 measured=15
+2026-08-31 23:12:05,823 | INFO | family=moe status=PASS median_slowdown=4.782% ci95=[-24.026, 12.307] pairs=15
+2026-08-31 23:13:07,258 | INFO | family=mot status=PASS median_slowdown=2.350% ci95=[-24.425, 66.530] pairs=15

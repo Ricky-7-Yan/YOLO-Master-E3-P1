@@ -1,0 +1,9 @@
+{
+  "status": "FAILED_BEFORE_MEASUREMENT",
+  "stage": "moe_warmup_observer_contract",
+  "expected_events_per_step": 6,
+  "observed_events_per_step": 0,
+  "error": "Expected 6 observer events, got 0 for family=moe",
+  "root_cause": "The benchmark assumed train mode always publishes an outer MoE snapshot. The tested OptimizedMOEImproved path did not publish one during this forward, so the collector must retain its explicitly labelled nested-router fallback in train mode as well as eval mode.",
+  "result_policy": "No overhead result was produced from this failed run. The run is retained as negative evidence."
+}

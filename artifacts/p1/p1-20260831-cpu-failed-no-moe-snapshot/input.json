@@ -1,0 +1,43 @@
+{
+  "dataset_root": "C:\\Users\\23145\\Desktop\\腾讯犀牛鸟\\datasets\\coco8",
+  "split_image_count": 4,
+  "selected_indices": [
+    0,
+    1
+  ],
+  "dataset": "coco8.yaml",
+  "split": "val",
+  "batch_size": 2,
+  "images": [
+    {
+      "path": "C:\\Users\\23145\\Desktop\\腾讯犀牛鸟\\datasets\\coco8\\images\\val\\000000000036.jpg",
+      "name": "000000000036.jpg",
+      "sha256": "4c28394898302bef227834d63498a0fc54e4295f11c590c8a8ebcba51347bc03",
+      "original_size_wh": [
+        481,
+        640
+      ],
+      "input_size_wh": [
+        64,
+        64
+      ],
+      "normalization": "RGB uint8 / 255.0",
+      "sample_index": 0
+    },
+    {
+      "path": "C:\\Users\\23145\\Desktop\\腾讯犀牛鸟\\datasets\\coco8\\images\\val\\000000000042.jpg",
+      "name": "000000000042.jpg",
+      "sha256": "c87afb6dfe55db1cada52479ed939a231e030d64f5e3c3eaf7eb1544591f853a",
+      "original_size_wh": [
+        640,
+        478
+      ],
+      "input_size_wh": [
+        64,
+        64
+      ],
+      "normalization": "RGB uint8 / 255.0",
+      "sample_index": 1
+    }
+  ]
+}

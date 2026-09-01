@@ -1,0 +1,20 @@
+{
+  "status": "FAILED_AFTER_PARTIAL_MEASUREMENT",
+  "stage": "latent_state_hash",
+  "error": "AttributeError: 'dict' object has no attribute 'detach'",
+  "completed_internal_partial_measurements": {
+    "moe": {
+      "median_paired_slowdown_percent": 4.782,
+      "bootstrap_95_ci_percent": [-24.026, 12.307],
+      "measured_pairs": 15
+    },
+    "mot": {
+      "median_paired_slowdown_percent": 2.350,
+      "bootstrap_95_ci_percent": [-24.425, 66.530],
+      "measured_pairs": 15
+    }
+  },
+  "result_policy": "These partial internal measurements are retained only as diagnostic evidence and are not a formal or complete P1 conclusion because the three-family run did not finish.",
+  "root_cause": "The model-state fingerprint helper assumed every state_dict value was a tensor, but the Latent model exposes dictionary-valued extra state.",
+  "resolution": "The fingerprint helper now recursively hashes tensors, dictionaries, lists, tuples and scalar metadata before the complete benchmark is rerun."
+}

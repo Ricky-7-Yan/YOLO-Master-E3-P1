@@ -1,0 +1,27 @@
+[
+  {
+    "path": "command.txt",
+    "bytes": 22,
+    "sha256": "8a79cd8a638f2df8a00452a4ed0e83e44fe4f766a9eaacb2d8d72fbbb649a562"
+  },
+  {
+    "path": "config.resolved.yaml",
+    "bytes": 712,
+    "sha256": "faaf987dc2619ae0fc577e2b58cfca19c535392ca3d7f2eb880632fc9b2991bf"
+  },
+  {
+    "path": "failure.json",
+    "bytes": 616,
+    "sha256": "1e729bd69c9dcc2e8bb2089d09665428e2844bc620d76a018fdfcbde6acbdd79"
+  },
+  {
+    "path": "full.log",
+    "bytes": 132,
+    "sha256": "d6cbf7df2f1aa09854eb97587afd9521505b91c23f4746fe99df8c67159e7a4f"
+  },
+  {
+    "path": "input.json",
+    "bytes": 1129,
+    "sha256": "68adbd32f36d011cab7a014dfe8a3d3e224f6b7f2253c0e84cb83ba0813b5173"
+  }
+]
