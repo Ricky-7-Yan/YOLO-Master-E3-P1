@@ -1,0 +1,2 @@
+# Reproducibility artifacts are hashed byte-for-byte; never rewrite line endings.
+artifacts/** -text
