@@ -24,3 +24,9 @@
 ## Hard-fail
 
 模型状态不同、loss 不等、事件数错误、hook 未移除、HTTP smoke 失败或证据目录覆盖都会立即失败。部分 family 完成后失败的运行不进入正式 P1 结论。
+
+## 加强路径
+
+加强 benchmark 独立于原 surrogate benchmark，避免事后改变已完成实验的口径。它把两个 batch 的 4 张 coco8 val 图片和真实标签预加载后，比较三个并行、初态相同的训练轨迹：关闭采集、内存采集、采集并写 JSONL。计时覆盖真实检测损失、反传、梯度裁剪、官方分组 SGD 更新以及可选 writer；模型/optimizer 哈希、schema 校验与绘图仍在计时外完成。
+
+六种条件排列解决三条件测试的位置偏差；事件 stream 在整个 family 内保留并强制验证全局连续序号。预检与正式状态通过 `formal_verdict_eligible` 分开，防止小样本诊断被误读为验收结果。完整预注册口径见 [`STRENGTHENED_PROTOCOL.md`](STRENGTHENED_PROTOCOL.md)。

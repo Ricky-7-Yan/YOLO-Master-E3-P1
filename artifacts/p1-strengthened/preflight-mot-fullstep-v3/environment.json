@@ -1,0 +1,25 @@
+{
+  "captured_at": "2026-09-01T23:43:03+08:00",
+  "platform": "Windows-10-10.0.26200-SP0",
+  "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+  "python_executable": "C:\\Users\\23145\\Desktop\\腾讯犀牛鸟\\实战阶段\\YOLO-Master-baseline\\.venv\\Scripts\\python.exe",
+  "torch": "2.13.0+cpu",
+  "ultralytics": "8.4.101",
+  "matplotlib": "3.11.1",
+  "pillow": "12.3.0",
+  "cuda_available": false,
+  "torch_num_threads": 16,
+  "source_root": "C:\\Users\\23145\\Desktop\\腾讯犀牛鸟\\实战阶段\\YOLO-Master-main-07d3303",
+  "configured_official_ref": "07d330325b5a26b75aabfc75389f9bcbc0d40245",
+  "configured_official_tree": "e4a900338bd6679d5ad9f8673e466b250ba2c711",
+  "source_git": {
+    "head": null,
+    "tree": null,
+    "status_short": null
+  },
+  "tool_git": {
+    "head": "c75b6611cf2e174fe7514b09c6741acf5d195b63",
+    "tree": "5a659cfb7b7c6dd26945eebbc3ca05c39d0f52d5",
+    "status_short": "M .gitignore\n M src/e3_p1/plotting.py\n?? artifacts/p1-strengthened/\n?? configs/p1_strengthened.yaml\n?? docs/STRENGTHENED_PROTOCOL.md\n?? run_p1_strengthened.cmd\n?? src/e3_p1/strengthened.py\n?? tests/test_p1_strengthened.py"
+  }
+}

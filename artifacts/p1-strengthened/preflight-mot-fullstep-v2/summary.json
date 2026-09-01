@@ -1,0 +1,150 @@
+{
+  "status": "FAIL",
+  "evidence_strength": "INCONCLUSIVE",
+  "scope": "E3 P1 strengthened real detection-loss/backward/optimizer paired benchmark",
+  "run_id": "preflight-mot-fullstep-v2",
+  "official_runtime_ref": "07d330325b5a26b75aabfc75389f9bcbc0d40245",
+  "official_runtime_tree": "e4a900338bd6679d5ad9f8673e466b250ba2c711",
+  "families": {
+    "mot": {
+      "status": "FAIL",
+      "evidence_strength": "INCONCLUSIVE",
+      "model_config": "ultralytics/cfg/models/26/yolo26-master-mot-n.yaml",
+      "model_parameters": 2927512,
+      "registered_modules": [
+        "model.13.m.0",
+        "model.16.m.0",
+        "model.19.m.0",
+        "model.22.m.0"
+      ],
+      "measured_pairs": 6,
+      "steps_per_condition": 12,
+      "order_position_balance": {
+        "off": [
+          2,
+          2,
+          2
+        ],
+        "capture": [
+          2,
+          2,
+          2
+        ],
+        "capture_jsonl": [
+          2,
+          2,
+          2
+        ]
+      },
+      "initial_model_state_sha256": {
+        "off": "a0578037c1a3989d917a5102f68738fb2a63d1e764c264e21805086e937ec466",
+        "capture": "a0578037c1a3989d917a5102f68738fb2a63d1e764c264e21805086e937ec466",
+        "capture_jsonl": "a0578037c1a3989d917a5102f68738fb2a63d1e764c264e21805086e937ec466"
+      },
+      "initial_optimizer_state_sha256": {
+        "off": "0183134db39fa4b2f4ca596ef69afa8c7684720077089c39cab1f3ca3d4a9514",
+        "capture": "0183134db39fa4b2f4ca596ef69afa8c7684720077089c39cab1f3ca3d4a9514",
+        "capture_jsonl": "0183134db39fa4b2f4ca596ef69afa8c7684720077089c39cab1f3ca3d4a9514"
+      },
+      "loss_gradient_and_state_equivalence": "PASS",
+      "hooks_removed": true,
+      "condition_ms": {
+        "off": {
+          "mean": 2564.6940167061985,
+          "median": 2603.6646499997005,
+          "std": 591.7254266820064,
+          "min": 1892.816600156948,
+          "max": 3270.2948001679033
+        },
+        "capture": {
+          "mean": 2047.7599833781521,
+          "median": 2061.4344499772415,
+          "std": 276.35483684439396,
+          "min": 1572.1948998980224,
+          "max": 2407.663700170815
+        },
+        "capture_jsonl": {
+          "mean": 3087.504349881783,
+          "median": 3138.2723498390988,
+          "std": 580.5832625978497,
+          "min": 2278.7545998580754,
+          "max": 3762.3926997184753
+        }
+      },
+      "comparisons": {
+        "capture_vs_off_percent": {
+          "mean": -16.56049425230069,
+          "median": -17.017179943702235,
+          "std": 21.417259571375276,
+          "min": -46.2173192712801,
+          "max": 9.695677856890265,
+          "bootstrap_95_ci": [
+            -39.541711787843866,
+            6.877408974644035
+          ],
+          "task_status": "PASS",
+          "evidence_strength": "STRONG"
+        },
+        "capture_jsonl_vs_off_percent": {
+          "mean": 25.071800079904772,
+          "median": 18.313234619362245,
+          "std": 36.00242584621774,
+          "min": -8.758124812675664,
+          "max": 90.97383230082916,
+          "bootstrap_95_ci": [
+            -4.4959206184551075,
+            61.39808623880718
+          ],
+          "task_status": "FAIL",
+          "evidence_strength": "INCONCLUSIVE"
+        },
+        "writer_increment_vs_capture_percent": {
+          "mean": 54.55928410322925,
+          "median": 36.334015814831275,
+          "std": 46.04840556359661,
+          "min": 14.604954297263575,
+          "max": 139.30828804765338,
+          "bootstrap_95_ci": [
+            20.642583582211508,
+            106.70125291264496
+          ],
+          "task_status": "FAIL",
+          "evidence_strength": "INCONCLUSIVE"
+        }
+      },
+      "primary_rule": "capture_jsonl vs off paired median slowdown must be below target",
+      "target_slowdown_percent": 10.0
+    }
+  },
+  "target_slowdown_percent": 10.0,
+  "methodology": {
+    "conditions": [
+      "off",
+      "capture",
+      "capture_jsonl"
+    ],
+    "order": "six balanced permutations across three conditions",
+    "warmup_pairs": 0,
+    "sample_batches": [
+      [
+        0,
+        1
+      ],
+      [
+        2,
+        3
+      ]
+    ],
+    "timed_region": "zero_grad + real detection loss + backward + gradient clip + SGD step + optional JSONL write/flush",
+    "excluded": "model construction, hook registration/removal, state hashing, schema validation, plotting, dashboard HTTP",
+    "primary_statistic": "median paired capture_jsonl-vs-off slowdown",
+    "uncertainty": "deterministic-seed bootstrap 95% interval for paired median",
+    "task_rule": "each family primary median must be below 10 percent",
+    "strength_rule": "STRONG only when each family bootstrap upper bound is also below 10 percent"
+  },
+  "limitations": [
+    "CPU-only random-initialized models; no NVIDIA CUDA, AMP or multi-epoch convergence claim.",
+    "Images and labels are deterministically preloaded so unrelated file I/O cannot dilute observer slowdown.",
+    "The JSONL condition flushes every step but does not call fsync; dashboard HTTP remains an independent consumer."
+  ]
+}

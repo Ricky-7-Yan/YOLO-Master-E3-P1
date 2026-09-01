@@ -6,3 +6,4 @@ __pycache__/
 htmlcov/
 .venv/
 artifacts/p1/repro-*/
+artifacts/p1-strengthened/repro-*/

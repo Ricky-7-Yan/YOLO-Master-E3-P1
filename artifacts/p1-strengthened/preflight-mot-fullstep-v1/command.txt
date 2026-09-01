@@ -1,0 +1,1 @@
+python -m e3_p1.strengthened --config configs/p1_strengthened.yaml --run-id preflight-mot-fullstep-v1 --family mot --preflight --no-update-latest

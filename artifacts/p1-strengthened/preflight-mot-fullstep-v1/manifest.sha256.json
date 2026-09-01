@@ -1,0 +1,37 @@
+[
+  {
+    "path": "command.txt",
+    "bytes": 146,
+    "sha256": "ca19e9d6bae9400e6230ff3931d2e98eab0671ac76b8f4b6aecf10f82d475640"
+  },
+  {
+    "path": "config.resolved.yaml",
+    "bytes": 843,
+    "sha256": "f4a079a43f02c3fcf538d80afe2291539eea80435d55aab41a8e4d80f3a11501"
+  },
+  {
+    "path": "environment.json",
+    "bytes": 1204,
+    "sha256": "d0c7b3dc71701e3437e5c68ed8cac714e094f4fc04c13064978a953121c6834e"
+  },
+  {
+    "path": "failure.json",
+    "bytes": 2203,
+    "sha256": "39eb19a5d36eb0f9f6cfd9ad750e4fb34122bd4a00e42e703431c756c825803e"
+  },
+  {
+    "path": "full.log",
+    "bytes": 2162,
+    "sha256": "f4b7c0ee1202d35ea2c7ac1d25acbacc5736e9ff152ad98489f1eeaded6f7851"
+  },
+  {
+    "path": "input.json",
+    "bytes": 3155,
+    "sha256": "e41a9093fd1c34b189a541f3bea81169dec1ec592e9d5ad69bc4dbe1f0bd8865"
+  },
+  {
+    "path": "writer-events-mot.jsonl",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+]

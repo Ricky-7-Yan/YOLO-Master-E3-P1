@@ -44,3 +44,53 @@ def save_benchmark_plot(families: dict[str, dict[str, Any]], path: Path, target_
     figure.suptitle("E3 P1 observer-overhead benchmark · real train-mode forward+backward")
     figure.savefig(path, dpi=180)
     plt.close(figure)
+
+
+def save_strengthened_plot(families: dict[str, dict[str, Any]], path: Path, target_percent: float) -> None:
+    """Plot full-step condition timings and layered paired slowdowns."""
+
+    import matplotlib
+
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+
+    names = list(families)
+    x = np.arange(len(names))
+    figure, axes = plt.subplots(1, 2, figsize=(13.5, 5.4), constrained_layout=True)
+    width = 0.25
+    condition_styles = (
+        ("off", "Off", "#61758A"),
+        ("capture", "Capture", "#2F6FAE"),
+        ("capture_jsonl", "Capture + JSONL", "#50A47B"),
+    )
+    for offset, (condition, label, color) in zip((-width, 0.0, width), condition_styles):
+        values = [families[name]["condition_ms"][condition]["median"] for name in names]
+        axes[0].bar(x + offset, values, width, label=label, color=color)
+    axes[0].set_xticks(x, [name.upper() for name in names])
+    axes[0].set_ylabel("Median two-batch full-step unit (ms)")
+    axes[0].set_title("Detection loss + backward + optimizer")
+    axes[0].grid(axis="y", color="#D8DEE6")
+    axes[0].legend()
+
+    comparison_styles = (
+        ("capture_vs_off_percent", "Capture vs off", "#2F6FAE", -0.12),
+        ("capture_jsonl_vs_off_percent", "Capture + JSONL vs off", "#50A47B", 0.12),
+    )
+    for key, label, color, offset in comparison_styles:
+        values = [families[name]["comparisons"][key]["median"] for name in names]
+        lower = [families[name]["comparisons"][key]["bootstrap_95_ci"][0] for name in names]
+        upper = [families[name]["comparisons"][key]["bootstrap_95_ci"][1] for name in names]
+        errors = np.asarray(
+            [[value - low for value, low in zip(values, lower)], [high - value for value, high in zip(values, upper)]]
+        )
+        axes[1].errorbar(x + offset, values, yerr=errors, fmt="o", capsize=5, color=color, label=label)
+    axes[1].axhline(target_percent, color="#C83E4D", linestyle="--", label=f"Task target < {target_percent:g}%")
+    axes[1].axhline(0.0, color="#61758A", linewidth=0.9)
+    axes[1].set_xticks(x, [name.upper() for name in names])
+    axes[1].set_ylabel("Paired slowdown (%)")
+    axes[1].set_title("Median and bootstrap 95% CI")
+    axes[1].grid(axis="y", color="#D8DEE6")
+    axes[1].legend()
+    figure.suptitle("E3 P1 strengthened layered observer benchmark")
+    figure.savefig(path, dpi=180)
+    plt.close(figure)

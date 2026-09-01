@@ -1,0 +1,3 @@
+2026-09-01 23:38:05,600 | INFO | scope=E3 P1 strengthened full detection step device=cpu batches=2 batch=2 imgsz=64
+2026-09-01 23:39:06,152 | INFO | family=mot status=FAIL strength=INCONCLUSIVE full_median=18.313% ci95=[-4.496, 61.398] pairs=6
+2026-09-01 23:39:07,199 | INFO | result=FAIL evidence_strength=INCONCLUSIVE artifacts=C:\Users\23145\Desktop\腾讯犀牛鸟\实战阶段\YOLO-Master-E3-P1\artifacts\p1-strengthened\preflight-mot-fullstep-v2

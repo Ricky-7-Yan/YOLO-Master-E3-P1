@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "yolo-master-e3-p1"
-version = "0.1.0"
-description = "Realtime routing dashboard and paired observer-overhead benchmark for YOLO-Master E3"
+version = "0.2.0"
+description = "Realtime routing dashboard and full-step paired observer-overhead benchmark for YOLO-Master E3"
 requires-python = ">=3.9"
 dependencies = [
   "matplotlib>=3.5",

@@ -1,0 +1,52 @@
+[
+  {
+    "path": "capture-schema-samples.jsonl",
+    "bytes": 21579,
+    "sha256": "07392068cdd1f03ad90b86470defdff986455c12495c8de2a6a454bd4cf2f33f"
+  },
+  {
+    "path": "command.txt",
+    "bytes": 146,
+    "sha256": "822ac4e77c77e1b44c417e818a0675c5839b575e9b2473eae1d33f812c13518c"
+  },
+  {
+    "path": "config.resolved.yaml",
+    "bytes": 843,
+    "sha256": "4f0f635a77c80b1416ce4d407fc88bc065e8c848948db1037888f746140c498d"
+  },
+  {
+    "path": "environment.json",
+    "bytes": 1204,
+    "sha256": "8d1de68a5138b119debb5683f00a01e85d3b8b991cd18d944100110f09ba1699"
+  },
+  {
+    "path": "full.log",
+    "bytes": 455,
+    "sha256": "2e2b40fafb01c1a9777ad64db3fe3119d7671f50e304a25f69808ffd07cd09da"
+  },
+  {
+    "path": "fullstep-layered-overhead.png",
+    "bytes": 91146,
+    "sha256": "d535a254d7ad7f520294f04571315c71ddaf9da24d186b72856659b196bf3aae"
+  },
+  {
+    "path": "fullstep-pairs.jsonl",
+    "bytes": 14119,
+    "sha256": "c09ce8ebd3fb9085a94e163bd9339e16f8d300b943e4cac182d1b70c0a9d44c5"
+  },
+  {
+    "path": "input.json",
+    "bytes": 3155,
+    "sha256": "e41a9093fd1c34b189a541f3bea81169dec1ec592e9d5ad69bc4dbe1f0bd8865"
+  },
+  {
+    "path": "summary.json",
+    "bytes": 5231,
+    "sha256": "f5dab1e54de4a4d47e42d624efbc43671161ee96ffc9c6adb704ddfb2078a278"
+  },
+  {
+    "path": "writer-events-mot.jsonl",
+    "bytes": 120551,
+    "sha256": "950341a8933e2092d443514d8e361f4510de37bf775c97063b51d77f6cfd896a"
+  }
+]

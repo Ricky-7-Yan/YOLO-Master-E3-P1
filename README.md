@@ -20,10 +20,13 @@ YOLO-Master-baseline/
 ```bat
 run_tests.cmd
 run_p1_benchmark.cmd
+run_p1_strengthened.cmd
 run_p1_dashboard.cmd
 ```
 
 `run_p1_benchmark.cmd` 默认创建新的 `repro-*` 证据目录，不覆盖正式结果，也不修改正式 `LATEST.txt`。`run_p1_dashboard.cmd` 默认读取相邻 P0 仓库的正式 `LATEST.txt`，在 `127.0.0.1:8765` 启动只读面板。
+
+`run_p1_strengthened.cmd` 是加强协议入口：以 coco8 真实标签执行 `DetectionModel.loss + backward + 官方分组 SGD step`，分层比较关闭观察器、仅内存采集、采集并逐 step 写入 JSONL 三种条件。正式结论与原 surrogate 基线分开归档，不混用数字。
 
 ## 当前状态
 
@@ -41,6 +44,7 @@ run_p1_dashboard.cmd
 
 - [`docs/REQUIREMENTS.md`](docs/REQUIREMENTS.md)：P1 完成口径和统计判据。
 - [`docs/DESIGN.md`](docs/DESIGN.md)：实时 consumer 与 paired benchmark 设计。
+- [`docs/STRENGTHENED_PROTOCOL.md`](docs/STRENGTHENED_PROTOCOL.md)：正式加强运行前锁定的协议。
 - [`docs/EXPERIMENT_REPORT.md`](docs/EXPERIMENT_REPORT.md)：正式实验结果与证据索引。
 - [`docs/WORK_LOG.md`](docs/WORK_LOG.md)：失败、修复与验证记录。
 - [`docs/LIMITATIONS.md`](docs/LIMITATIONS.md)：当前不能外推的结论。
