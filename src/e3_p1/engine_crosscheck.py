@@ -41,7 +41,7 @@ def _load_engine_config(config_path: Path, run_id_override: str | None = None) -
     if not RUN_ID_PATTERN.fullmatch(run_id):
         raise ValueError("run_id must be path-safe and contain at most 128 letters, digits, dots, underscores, or hyphens")
     config["run_id"] = run_id
-    for name in ("batch_size", "image_size", "warmup_pairs", "measured_pairs"):
+    for name in ("batch_size", "image_size", "epochs", "warmup_pairs", "measured_pairs"):
         config[name] = int(config[name])
         if config[name] < 0 or name in {"batch_size", "image_size", "measured_pairs"} and config[name] == 0:
             raise ValueError(f"{name} must be positive (warmup_pairs may be zero)")
@@ -187,7 +187,7 @@ class _TrainerObserver:
         self.registered_modules: list[str] = []
         self.batch_records: list[dict[str, Any]] = []
         self.epoch_started: float | None = None
-        self.epoch_window_ms: float | None = None
+        self.epoch_windows_ms: list[float] = []
         self.initial_model_sha256: str | None = None
         self.initial_optimizer_sha256: str | None = None
         self.final_model_sha256: str | None = None
@@ -266,7 +266,7 @@ class _TrainerObserver:
         del trainer
         if self.epoch_started is None:
             raise RuntimeError("epoch timer was not started")
-        self.epoch_window_ms = (time.perf_counter() - self.epoch_started) * 1000.0
+        self.epoch_windows_ms.append((time.perf_counter() - self.epoch_started) * 1000.0)
 
     def on_train_end(self, trainer: Any) -> None:
         self.final_model_sha256 = _state_sha256(trainer.model)
@@ -295,6 +295,7 @@ def _assert_pair_equivalence(off: dict[str, Any], observed: dict[str, Any], *, f
         "final_ema_sha256",
         "optimizer_steps",
         "batch_count",
+        "epochs_completed",
         "sanitized_transients",
     )
     for field in exact_fields:
@@ -328,7 +329,7 @@ def _run_condition(
     overrides = {
         "model": str(source_root / profile["model_config"]),
         "data": config["dataset"],
-        "epochs": 1,
+        "epochs": int(config["epochs"]),
         "batch": int(config["batch_size"]),
         "imgsz": int(config["image_size"]),
         "device": config["device"],
@@ -384,7 +385,7 @@ def _run_condition(
     try:
         trainer.train()
         full_lifecycle_ms = (time.perf_counter() - lifecycle_started) * 1000.0
-        if observer.epoch_window_ms is None or observer.final_model_sha256 is None:
+        if len(observer.epoch_windows_ms) != int(config["epochs"]) or observer.final_model_sha256 is None:
             raise RuntimeError(f"Trainer callbacks did not complete for {label}")
         events = load_jsonl(writer_path, limit=10000) if writer_path is not None else []
         expected_events = len(observer.registered_modules) * len(observer.batch_records)
@@ -399,9 +400,11 @@ def _run_condition(
             "pair_index": pair_index,
             "condition": condition,
             "seed": seed,
-            "epoch_window_ms": observer.epoch_window_ms,
+            "epoch_window_ms": float(sum(observer.epoch_windows_ms)),
+            "epoch_windows_ms": observer.epoch_windows_ms,
             "full_lifecycle_ms": full_lifecycle_ms,
             "batch_count": len(observer.batch_records),
+            "epochs_completed": len(observer.epoch_windows_ms),
             "optimizer_steps": int(trainer.optimizer_steps),
             "amp_enabled": bool(trainer.amp),
             "device": str(trainer.device),
@@ -453,6 +456,7 @@ def _family_summary(rows: list[dict[str, Any]], *, measured_pairs: int) -> dict[
         },
         "registered_modules": observed_rows[0]["registered_modules"],
         "batch_count_per_run": observed_rows[0]["batch_count"],
+        "epochs_per_run": observed_rows[0]["epochs_completed"],
         "optimizer_steps_per_run": observed_rows[0]["optimizer_steps"],
         "writer_event_count": sum(row["event_validation"]["actual_count"] for row in observed_rows),
         "setup_transient_sanitization_count_per_run": len(observed_rows[0]["sanitized_transients"]),
@@ -606,7 +610,7 @@ def run(
                 "order": "balanced AB/BA by pair",
                 "warmup_pairs": int(config["warmup_pairs"]),
                 "measured_pairs": int(config["measured_pairs"]),
-                "timed_epoch_window": "on_train_epoch_start through on_train_epoch_end, including dataloader iteration, preprocess, detection loss, backward, optimizer steps, event JSON encoding/write/flush",
+                "timed_epoch_window": "sum of each on_train_epoch_start through on_train_epoch_end window, including dataloader iteration, preprocess, detection loss, backward, optimizer steps, event JSON encoding/write/flush",
                 "full_lifecycle_window": "trainer construction through train completion",
                 "determinism": "same pair seed; stochastic geometric/color augmentation disabled; raw collated batch hashes must match",
                 "equivalence": "initial/final model, optimizer and EMA hashes; raw batch hashes; loss items; optimizer step count",
@@ -615,7 +619,7 @@ def run(
             },
             "interpretation": "Integration evidence only. The preregistered 108-pair strengthened run remains the formal <10% overhead verdict.",
             "limitations": [
-                "CPU-only, one coco8 train epoch per execution, batch=2, imgsz=64.",
+                "CPU-only, five coco8 train epochs per execution, batch=2, imgsz=64.",
                 "The configured measured pairs are descriptive and intentionally not used for a new confidence-bound verdict.",
                 "Validation, checkpoint serialization, CUDA, AMP and multi-epoch convergence are outside this cross-check.",
                 "The frozen Latent model cannot enter ModelEMA deepcopy without clearing nine constructor-time non-leaf routing snapshot fields; this harness records and applies that setup guard without changing state_dict parameters.",

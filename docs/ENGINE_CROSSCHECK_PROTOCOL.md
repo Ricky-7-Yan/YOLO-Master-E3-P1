@@ -6,7 +6,7 @@
 
 首轮和加强基准已经覆盖真实模型 forward、检测 loss、backward、官方分组 optimizer 与 JSONL writer，但为了隔离观察器开销，数据在计时前预加载。交叉验证进一步接入官方 `DetectionTrainer`，覆盖 coco8 train dataloader、batch preprocess、检测损失、反传、optimizer step、EMA、训练回调和面板 consumer。
 
-每次执行为 CPU、batch=2、imgsz=64、1 个 coco8 train epoch（2 个 batch）。关闭会随机改变输入的几何、颜色和翻转增强，使同一 pair 的原始 collated batch 可逐字节比较。关闭 validation、plot 和 checkpoint 序列化；这些不是 P1 路由观察链路，且会把不相关 I/O 混入交叉验证。
+每次执行为 CPU、batch=2、imgsz=64、连续 5 个 coco8 train epoch（共 10 个 batch）。关闭会随机改变输入的几何、颜色和翻转增强，使同一 pair 的原始 collated batch 可逐字节比较。关闭 validation、plot 和 checkpoint 序列化；这些不是 P1 路由观察链路，且会把不相关 I/O 混入交叉验证。
 
 ## 条件与顺序
 
@@ -17,7 +17,7 @@
 
 ## 两个计时窗口
 
-1. epoch window：`on_train_epoch_start` 到 `on_train_epoch_end`。包含 dataloader 迭代、preprocess、forward、检测 loss、backward、optimizer step，以及观察条件中的 JSON 编码、write、每 batch flush。
+1. epoch window：累加 5 次 `on_train_epoch_start` 到 `on_train_epoch_end`。包含 dataloader 迭代、preprocess、forward、检测 loss、backward、optimizer step，以及观察条件中的 JSON 编码、write、每 batch flush。连续 10 个 batch 用于降低单个 2-batch epoch 的 CPU 调度噪声。
 2. full lifecycle：Trainer 构造开始到训练完成。它包含模型和数据集准备，只作诊断，不用于 P1 正式判据。
 
 ## 等价性 hard-fail

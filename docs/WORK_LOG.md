@@ -57,3 +57,5 @@
 - 冻结三族正式交叉验证协议：每族 2 对 warmup + 6 对 measured；小样本数字只作描述，不替换正式开销结论。
 - 第一次三族运行完成 MoE 与 MoT 后在 Latent `ModelEMA(deepcopy)` 启动阶段失败；单独新进程复现同样错误，排除跨族残留。
 - 属性检查定位到三个 `LatentMixture` 共 9 个 constructor forward 遗留的非叶 `_last_routing_*` 张量。证据 harness 增加限定 setup guard：只清空这些不属于 `state_dict` 的瞬时快照，并把逐项清单纳入 off/on 等价性检查。
+- 三族 v2 完成 48 次单 epoch Trainer 运行、208 条事件和 dashboard HTTP smoke，但每次只有 2 个 batch，6 对描述的波动范围达到 `-54%～+231%`，不足以稳定描述开销量级；该运行只留本地诊断。
+- v3 在不改正式 108 对判据的前提下，把每次 Trainer 执行扩为连续 5 epoch、10 个 batch，按 5 个 epoch window 之和比较，降低过短计时窗造成的调度噪声。

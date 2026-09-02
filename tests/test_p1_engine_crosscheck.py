@@ -23,7 +23,7 @@ def test_engine_order_is_balanced_ab_ba():
 def test_engine_config_requires_even_measured_pairs(tmp_path: Path):
     path = tmp_path / "engine.yaml"
     path.write_text(
-        "run_id: test\nbatch_size: 2\nimage_size: 64\nwarmup_pairs: 0\nmeasured_pairs: 3\nprofiles:\n  mot: {}\n",
+        "run_id: test\nbatch_size: 2\nimage_size: 64\nepochs: 5\nwarmup_pairs: 0\nmeasured_pairs: 3\nprofiles:\n  mot: {}\n",
         encoding="utf-8",
     )
     with pytest.raises(ValueError, match="even"):
@@ -62,6 +62,7 @@ def _row() -> dict:
         "final_ema_sha256": "e",
         "optimizer_steps": 2,
         "batch_count": 2,
+        "epochs_completed": 1,
         "sanitized_transients": [],
         "batches": [{"raw_batch_sha256": "f"}, {"raw_batch_sha256": "g"}],
         "loss_items": [1.0, 2.0],

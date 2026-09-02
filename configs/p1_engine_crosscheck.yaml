@@ -1,4 +1,4 @@
-run_id: p1e-20260903-cpu-trainer-v2
+run_id: p1e-20260903-cpu-trainer-v3
 
 runtime_root: ../YOLO-Master-main-07d3303
 p0_repo_root: ../YOLO-Master-E3-P0
@@ -17,6 +17,7 @@ seed: 2300
 dataset: coco8.yaml
 image_size: 64
 batch_size: 2
+epochs: 5
 warmup_pairs: 2
 measured_pairs: 6
 target_slowdown_percent: 10.0
