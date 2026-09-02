@@ -43,6 +43,17 @@ run_p1_dashboard.cmd
 
 正式加强证据见 [`artifacts/p1-strengthened/p1s-20260901-cpu-fullstep-v1/`](artifacts/p1-strengthened/p1s-20260901-cpu-fullstep-v1/)。负 slowdown 只表示本次 CPU 噪声下未检出正向开销，不能解释为观察器加速。
 
+### 真实 DetectionTrainer 集成交叉验证
+
+`p1e-20260903-cpu-trainer-v3` 进一步完成 48 次真实 `DetectionTrainer` 执行：三族各 2 对 warmup、6 对 measured，每次连续 5 epoch、10 batch/optimizer step。训练数据加载、预处理、检测 loss、反传、optimizer、EMA、回调、逐 batch JSONL write/flush 和 dashboard HTTP 均进入同一端到端验证链路。
+
+- 18 个 measured pair 的初始/最终 model、optimizer、EMA、原始 batch、loss 序列与 step 数全部等价。
+- 原始流共 1,040 条事件；面板默认展示最近 1,000 条，三族均可消费。当前代码会同时报告源总量、窗口上限与截断状态。
+- 36 项归档文件独立重算 SHA-256 为 0 mismatch；冻结源码快照的 6 个关键文件哈希全部匹配。
+- CPU 小数据 epoch 计时波动很大（逐对范围约 `-84%～+284%`），所以该层明确为 `formal_verdict_eligible=false`，只证明集成与等价性，不替换上面的 108 对正式开销结论。
+
+交叉验证证据见 [`artifacts/p1-engine/p1e-20260903-cpu-trainer-v3/`](artifacts/p1-engine/p1e-20260903-cpu-trainer-v3/)。
+
 ### 首轮隔离微基准
 
 独立仓库正式运行 `p1-20260901-cpu-split` 已通过：

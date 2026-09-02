@@ -59,3 +59,13 @@
 - 属性检查定位到三个 `LatentMixture` 共 9 个 constructor forward 遗留的非叶 `_last_routing_*` 张量。证据 harness 增加限定 setup guard：只清空这些不属于 `state_dict` 的瞬时快照，并把逐项清单纳入 off/on 等价性检查。
 - 三族 v2 完成 48 次单 epoch Trainer 运行、208 条事件和 dashboard HTTP smoke，但每次只有 2 个 batch，6 对描述的波动范围达到 `-54%～+231%`，不足以稳定描述开销量级；该运行只留本地诊断。
 - v3 在不改正式 108 对判据的前提下，把每次 Trainer 执行扩为连续 5 epoch、10 个 batch，按 5 个 epoch window 之和比较，降低过短计时窗造成的调度噪声。
+
+## Trainer 集成交叉验证完成
+
+- v3 完成三族各 2 对 warmup、6 对 measured，AB/BA=3/3，共 48 次真实 `DetectionTrainer` 执行；每次 5 epoch、10 batch、10 optimizer step。
+- 18 个 measured pair 的初始/最终 model、optimizer、EMA、原始 collated batch、loss item 序列和步数均完全等价。
+- measured writer 产生 MoE 360、MoT 240、Latent 180 条事件；含 warmup 的原始流共 1,040 条，序号连续，dashboard HTTP 返回 200 并识别三族。
+- 发现 dashboard 默认最近窗口为 1,000 条；补充源事件总量、窗口上限与截断标记，避免将滑动窗口误读为事件丢失，并新增中间损坏行 hard-fail。
+- 运行时无 `.git` 元数据，改用预注册的 6 个关键文件 SHA-256 验证官方冻结快照，全部匹配；36 项归档证据独立重算 0 mismatch。
+- v3 描述性 epoch-window 中位数为 MoE `4.948%`、MoT `-33.209%`、Latent `13.629%`，逐对范围约 `-84%～+284%`。由于小数据 CPU 波动过大，结果不重新裁定 `<10%`，正式结论仍使用 108 对加强实验。
+- 修正交叉验证图：事件数量柱改为中性 family 配色，不再错误复用时延阈值的通过/失败颜色。

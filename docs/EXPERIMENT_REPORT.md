@@ -35,6 +35,35 @@
 - [`writer-events-*.jsonl`](../artifacts/p1-strengthened/p1s-20260901-cpu-fullstep-v1/)：三族真实 writer 事件流。
 - [`manifest.sha256.json`](../artifacts/p1-strengthened/p1s-20260901-cpu-fullstep-v1/manifest.sha256.json)：12 项正式证据的大小与 SHA-256。
 
+## 真实 DetectionTrainer 集成交叉验证
+
+运行 `p1e-20260903-cpu-trainer-v3` 为 `PASS`，但明确标记 `execution_mode=integration_crosscheck`、`formal_verdict_eligible=false`。这轮不重新裁定 `<10%`，而是验证同一观察链路进入官方 `DetectionTrainer` 后仍保持训练等价并能被面板消费。
+
+### 覆盖范围与数量
+
+- 三族各 2 对 warmup、6 对 measured，AB/BA=3/3；每个条件独立构造 Trainer，共 48 次执行。
+- 每次连续 5 个 coco8 train epoch，共 10 batch、10 optimizer step；覆盖官方 dataloader、preprocess、检测 loss、backward、optimizer、EMA 与 callbacks。
+- `capture_jsonl` 在每个 batch 中编码/write，并在 batch end flush；measured writer 事件为 MoE 360、MoT 240、Latent 180。
+- 连同 warmup，原始合并流共 1,040 条。dashboard HTTP smoke 为 200 且识别三族；API 的 `event_count=1000` 是默认最近窗口上限，不是丢失，原始 JSONL 和离线 snapshot 均保留全部 1,040 条。后续代码已显式返回源总量和 `truncated`。
+
+### 等价性和来源验证
+
+- 18 个 measured pair 的初始/最终 model、optimizer、EMA 哈希完全一致；原始 collated batch、loss item 序列、epoch 数、batch 数、optimizer step 数均一致。
+- 运行时是官方 ref `07d330325b5a26b75aabfc75389f9bcbc0d40245` 的无 `.git` 冻结快照，因此没有用目录名冒充 commit；Trainer、detect trainer、routing protocol 和三份模型 YAML 共 6 个预注册 SHA-256 全部 `MATCH`。
+- 证据目录共 36 项 manifest 条目，独立重算文件大小和 SHA-256 为 0 mismatch。
+
+### Latent 启动缺陷及限定处理
+
+首次三族运行在 Latent 的 `ModelEMA(deepcopy(model))` 前失败。全新 Python 进程仍可复现，检查发现三个 `LatentMixture` 在构造期 stride forward 后各留下 3 个非叶 `_last_routing_*` 张量，共 9 项，均不属于 `state_dict`。交叉验证 Trainer 仅在模型构造完成后清空这 9 个临时快照并记录 module、字段、shape 和 state-dict 归属；off/on 清单必须相同。训练首个 forward 会重新产生当前快照，不改参数或 buffer。
+
+### 描述性时延为什么不作新结论
+
+5-epoch epoch-window 的中位 slowdown 为 MoE `4.948%`、MoT `-33.209%`、Latent `13.629%`；逐对总范围约 `-84%～+284%`。正负极端同时出现，说明本机 CPU、coco8 每 epoch 仅 2 batch 的调度噪声仍显著高于观察器增量。这里不能据 Latent 中位数判正式失败，也不能据 MoT 负值声称加速；正式 P1 开销结论仍由预注册、重复数更高且带 bootstrap CI 的 108 对加强实验给出。
+
+![Trainer 集成交叉验证](../artifacts/p1-engine/p1e-20260903-cpu-trainer-v3/trainer-epoch-crosscheck.png)
+
+证据索引：[`summary.json`](../artifacts/p1-engine/p1e-20260903-cpu-trainer-v3/summary.json)、[`trainer-runs.jsonl`](../artifacts/p1-engine/p1e-20260903-cpu-trainer-v3/trainer-runs.jsonl)、[`routing-engine-all.jsonl`](../artifacts/p1-engine/p1e-20260903-cpu-trainer-v3/routing-engine-all.jsonl)、[`runtime-inputs.json`](../artifacts/p1-engine/p1e-20260903-cpu-trainer-v3/runtime-inputs.json)、[`manifest.sha256.json`](../artifacts/p1-engine/p1e-20260903-cpu-trainer-v3/manifest.sha256.json)。
+
 ## 首轮隔离微基准
 
 ### 结论

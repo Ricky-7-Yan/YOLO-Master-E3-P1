@@ -1,0 +1,182 @@
+[
+  {
+    "path": "command.txt",
+    "bytes": 77,
+    "sha256": "36b8e7d4fd2b0821009934f8d8c3cfde9acba85d9778e2ad90d48f84ae8eded1"
+  },
+  {
+    "path": "config.resolved.yaml",
+    "bytes": 1445,
+    "sha256": "0d9673b13e468e1378b66c3b6513c94ab3d4620788aa337d6d23e0e1578fac0b"
+  },
+  {
+    "path": "dashboard-smoke.json",
+    "bytes": 180,
+    "sha256": "8a26844e433c638f19108e4054e222eeece0b121e6a79b9e920cf4e6c33549eb"
+  },
+  {
+    "path": "dashboard-snapshot.json",
+    "bytes": 25248,
+    "sha256": "c21487daea3496babe266688c4bc44a6cc352964163821d1ec10892eac69b049"
+  },
+  {
+    "path": "dashboard.html",
+    "bytes": 3499,
+    "sha256": "1532519b23ce65328e34b0fe9913bae97f3bdac290364ff5234baaf67a12288a"
+  },
+  {
+    "path": "environment.json",
+    "bytes": 1014,
+    "sha256": "07bb60a45e5d277d902c17ab1b32d91ebc683b08aac39d17968997e6dd97a35a"
+  },
+  {
+    "path": "events-latent-measured-p00-capture_jsonl.jsonl",
+    "bytes": 94580,
+    "sha256": "527737d89e7da58206032ddce64cb95f9df9a0d0628650287252b7bfe28130f1"
+  },
+  {
+    "path": "events-latent-measured-p01-capture_jsonl.jsonl",
+    "bytes": 94576,
+    "sha256": "a497073fe257c5bbdbc0daf8271d36a5a9f6ea46e131a0a42bf45cbee301be27"
+  },
+  {
+    "path": "events-latent-measured-p02-capture_jsonl.jsonl",
+    "bytes": 94540,
+    "sha256": "7fa70374d5be6ea2da10e99d4cbabf6b8ba622f0be3ea4ec1393fd0b9037f19b"
+  },
+  {
+    "path": "events-latent-measured-p03-capture_jsonl.jsonl",
+    "bytes": 94543,
+    "sha256": "9006face97611b93eccc2d438b3e5089e5de2c51daf358f05faaad8cdf56be4c"
+  },
+  {
+    "path": "events-latent-measured-p04-capture_jsonl.jsonl",
+    "bytes": 94568,
+    "sha256": "364a46b801ef415e334e9e53aa67c056d350bee9a56ba7cb57c6d8e95aba192f"
+  },
+  {
+    "path": "events-latent-measured-p05-capture_jsonl.jsonl",
+    "bytes": 94572,
+    "sha256": "6ce686ded5fa2173a76dc3272dcfbcda55586e8a2ec7a7a43b48493aa2ecff59"
+  },
+  {
+    "path": "events-latent-warmup-p00-capture_jsonl.jsonl",
+    "bytes": 94460,
+    "sha256": "64d06eb7f8ba6e2ebae7aab8fcc31ccb01567069596911bb89d088e7cafc2406"
+  },
+  {
+    "path": "events-latent-warmup-p01-capture_jsonl.jsonl",
+    "bytes": 94456,
+    "sha256": "03c86b7650442461ce6b79098b27bc803db777a88d25ff40e510b9bb587a23ac"
+  },
+  {
+    "path": "events-moe-measured-p00-capture_jsonl.jsonl",
+    "bytes": 126170,
+    "sha256": "f981a938241fdc651df2480f97a297125733ae68719c7e4333c1cac0f6122de4"
+  },
+  {
+    "path": "events-moe-measured-p01-capture_jsonl.jsonl",
+    "bytes": 126265,
+    "sha256": "b0fbe22b8b2fdd5c884a4e8017f8d31985e1014ae599872566039821a8338fbc"
+  },
+  {
+    "path": "events-moe-measured-p02-capture_jsonl.jsonl",
+    "bytes": 126125,
+    "sha256": "29283ce545e29004fcd8dd069c411e8c7e93a7c427605253d4ede6cb7d2ce71f"
+  },
+  {
+    "path": "events-moe-measured-p03-capture_jsonl.jsonl",
+    "bytes": 126228,
+    "sha256": "ce56c6ccc170255f17a018600ffe05b05333f59f67912948e837a25c2bddce45"
+  },
+  {
+    "path": "events-moe-measured-p04-capture_jsonl.jsonl",
+    "bytes": 126154,
+    "sha256": "41da86bbb862882c8989c6956da9d5e404947b7a069a7b4e0cef61beebfc698d"
+  },
+  {
+    "path": "events-moe-measured-p05-capture_jsonl.jsonl",
+    "bytes": 126113,
+    "sha256": "7c399b41809748343d107f4739921d5e410731e423ddee0246b875b230712e62"
+  },
+  {
+    "path": "events-moe-warmup-p00-capture_jsonl.jsonl",
+    "bytes": 125930,
+    "sha256": "2f6fa91dd4e70c0a43ad6b8f4763f12ddea0763ab8bd59cd0144da1c9296c10f"
+  },
+  {
+    "path": "events-moe-warmup-p01-capture_jsonl.jsonl",
+    "bytes": 126025,
+    "sha256": "5742693f6f32111a5988ad8d49b145a682c8f68f1dae4ecfa7ca2a12f1dc7609"
+  },
+  {
+    "path": "events-mot-measured-p00-capture_jsonl.jsonl",
+    "bytes": 109552,
+    "sha256": "5aa90840e44ed26d9bf947e1ccaa5783850ab18a83479a6c5fe7837db3dcd70c"
+  },
+  {
+    "path": "events-mot-measured-p01-capture_jsonl.jsonl",
+    "bytes": 109611,
+    "sha256": "63f599fa8107071b3d1f16e9a95a2758b514bb05777481e1790fcf26a05ba50c"
+  },
+  {
+    "path": "events-mot-measured-p02-capture_jsonl.jsonl",
+    "bytes": 109611,
+    "sha256": "9cc71be86e544710af2c3f858c0ca41770e1536a601e3c2fb16455f3f26e33e7"
+  },
+  {
+    "path": "events-mot-measured-p03-capture_jsonl.jsonl",
+    "bytes": 109618,
+    "sha256": "bf3cc7eec3a5620733e11fe7f24d5ba425640f11bfd4ab49356f3a862b6aaa9d"
+  },
+  {
+    "path": "events-mot-measured-p04-capture_jsonl.jsonl",
+    "bytes": 109653,
+    "sha256": "afe9a5eb2923ae853920a62eff0eb322441fe66d88e255bdaccf8c7a6e7240fe"
+  },
+  {
+    "path": "events-mot-measured-p05-capture_jsonl.jsonl",
+    "bytes": 109624,
+    "sha256": "8cb19082b0cbd08141fe6205b43a75fb40aa77481a319a1dc6d8a81b7f9448a5"
+  },
+  {
+    "path": "events-mot-warmup-p00-capture_jsonl.jsonl",
+    "bytes": 109392,
+    "sha256": "69c4d3576eec3375554f2a50f11b86e753d07ccab90cfe331f82e39867ddbe14"
+  },
+  {
+    "path": "events-mot-warmup-p01-capture_jsonl.jsonl",
+    "bytes": 109451,
+    "sha256": "de531cc00a48b46f8d4e5d6a7219a39945d3615b6c14fda1d3152406c1157066"
+  },
+  {
+    "path": "full.log",
+    "bytes": 3837,
+    "sha256": "c20f6e574964227d5ff4baeb5643758851bb0fe47aeef8148307c5425d1621b3"
+  },
+  {
+    "path": "routing-engine-all.jsonl",
+    "bytes": 2818201,
+    "sha256": "ca9247c1395ca640ff8a3383f1ec4203c72e176594342fbdbb94c0feda2f9e3f"
+  },
+  {
+    "path": "runtime-inputs.json",
+    "bytes": 1435,
+    "sha256": "bc6267397a074b11097178352af7a896187bf94604c40092bc7bcf2f0ccbee58"
+  },
+  {
+    "path": "summary.json",
+    "bytes": 6435,
+    "sha256": "e45bca8c9cf7497fd51419b110bf78efebb1c8255c01f4a286f8ea0764c235b3"
+  },
+  {
+    "path": "trainer-epoch-crosscheck.png",
+    "bytes": 104782,
+    "sha256": "4c724cf299dcf9a455bdd777ef899c1a7ad79a572cce713780f44d5a9c53699c"
+  },
+  {
+    "path": "trainer-runs.jsonl",
+    "bytes": 266885,
+    "sha256": "c3d77199d4767f4b8f3d5e82ad29e56e34bce0a4bf6e0fe69b871d94fefd3462"
+  }
+]

@@ -2,7 +2,9 @@ from __future__ import annotations
 
 import json
 
-from e3_p1.dashboard import build_snapshot, load_jsonl, render_dashboard_html, smoke_test_server
+import pytest
+
+from e3_p1.dashboard import build_snapshot, load_jsonl, load_jsonl_window, render_dashboard_html, smoke_test_server
 
 
 def _event(family="mot"):
@@ -48,5 +50,29 @@ def test_dashboard_html_and_real_http_smoke(tmp_path):
         "health_status": 200,
         "html_contains_dashboard": True,
         "api_event_count": 1,
+        "api_source_event_count": 1,
+        "api_window_limit": 1000,
+        "api_truncated": False,
         "api_families": ["mot"],
     }
+
+
+def test_jsonl_window_reports_truncation_without_losing_source_count(tmp_path):
+    source = tmp_path / "events.jsonl"
+    source.write_text("".join(json.dumps(_event()) + "\n" for _ in range(1001)), encoding="utf-8")
+
+    window, source_count = load_jsonl_window(source)
+    snapshot = build_snapshot(window, source_event_count=source_count, window_limit=1000)
+
+    assert len(window) == 1000
+    assert snapshot["event_count"] == 1000
+    assert snapshot["source_event_count"] == 1001
+    assert snapshot["truncated"] is True
+
+
+def test_jsonl_loader_rejects_corruption_before_final_line(tmp_path):
+    source = tmp_path / "events.jsonl"
+    source.write_text(json.dumps(_event()) + "\n{broken}\n" + json.dumps(_event()) + "\n", encoding="utf-8")
+
+    with pytest.raises(ValueError, match="Invalid JSONL before final line"):
+        load_jsonl(source)

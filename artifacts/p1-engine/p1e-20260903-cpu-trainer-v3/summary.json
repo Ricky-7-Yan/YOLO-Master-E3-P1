@@ -1,0 +1,179 @@
+{
+  "status": "PASS",
+  "execution_mode": "integration_crosscheck",
+  "formal_verdict_eligible": false,
+  "scope": "real Ultralytics DetectionTrainer and coco8 dataloader integration cross-check",
+  "run_id": "p1e-20260903-cpu-trainer-v3",
+  "official_runtime_ref": "07d330325b5a26b75aabfc75389f9bcbc0d40245",
+  "official_runtime_tree": "e4a900338bd6679d5ad9f8673e466b250ba2c711",
+  "runtime_verification": "extracted_snapshot_file_hashes",
+  "families": {
+    "moe": {
+      "measured_pairs": 6,
+      "ab_pairs": 3,
+      "ba_pairs": 3,
+      "epoch_window_slowdown_percent": {
+        "values": [
+          21.68091089359312,
+          -23.416805877542025,
+          -8.093803820545897,
+          17.98939923882199,
+          49.975890056605124,
+          -51.63997524473274
+        ],
+        "median": 4.947797709138046,
+        "min": -51.63997524473274,
+        "max": 49.975890056605124
+      },
+      "full_lifecycle_slowdown_percent": {
+        "values": [
+          12.018210626354975,
+          -25.588693631835547,
+          -8.255606053308417,
+          19.873224363634854,
+          40.03715772118686,
+          -43.09511410629043
+        ],
+        "median": 1.8813022865232787,
+        "min": -43.09511410629043,
+        "max": 40.03715772118686
+      },
+      "registered_modules": [
+        "model.4.m.0.0.mlp",
+        "model.4.m.0.1.mlp",
+        "model.6.m.0.0.mlp",
+        "model.6.m.0.1.mlp",
+        "model.8.m.0.0.mlp",
+        "model.8.m.0.1.mlp"
+      ],
+      "batch_count_per_run": 10,
+      "epochs_per_run": 5,
+      "optimizer_steps_per_run": 10,
+      "writer_event_count": 360,
+      "setup_transient_sanitization_count_per_run": 0,
+      "pair_equivalence": "PASS",
+      "purpose": "integration cross-check; not a replacement formal overhead verdict"
+    },
+    "mot": {
+      "measured_pairs": 6,
+      "ab_pairs": 3,
+      "ba_pairs": 3,
+      "epoch_window_slowdown_percent": {
+        "values": [
+          -20.699107597480815,
+          90.42055294927658,
+          -59.24552817656568,
+          -84.04254840494896,
+          -45.71873429217387,
+          44.469870154438325
+        ],
+        "median": -33.20892094482734,
+        "min": -84.04254840494896,
+        "max": 90.42055294927658
+      },
+      "full_lifecycle_slowdown_percent": {
+        "values": [
+          -16.905676632001743,
+          81.17901661592893,
+          -52.48687264822023,
+          -80.72405456619144,
+          -47.664518723133696,
+          34.02177277839515
+        ],
+        "median": -32.28509767756772,
+        "min": -80.72405456619144,
+        "max": 81.17901661592893
+      },
+      "registered_modules": [
+        "model.13.m.0",
+        "model.16.m.0",
+        "model.19.m.0",
+        "model.22.m.0"
+      ],
+      "batch_count_per_run": 10,
+      "epochs_per_run": 5,
+      "optimizer_steps_per_run": 10,
+      "writer_event_count": 240,
+      "setup_transient_sanitization_count_per_run": 0,
+      "pair_equivalence": "PASS",
+      "purpose": "integration cross-check; not a replacement formal overhead verdict"
+    },
+    "latent": {
+      "measured_pairs": 6,
+      "ab_pairs": 3,
+      "ba_pairs": 3,
+      "epoch_window_slowdown_percent": {
+        "values": [
+          32.669701186123,
+          6.697110428240616,
+          284.2895519900212,
+          -45.6922372997802,
+          20.561256033179642,
+          -15.63266360400265
+        ],
+        "median": 13.62918323071013,
+        "min": -45.6922372997802,
+        "max": 284.2895519900212
+      },
+      "full_lifecycle_slowdown_percent": {
+        "values": [
+          45.611885742332014,
+          8.305087537869005,
+          236.29573514632546,
+          -40.148560713767075,
+          18.436062825510312,
+          -17.52252286140027
+        ],
+        "median": 13.37057518168966,
+        "min": -40.148560713767075,
+        "max": 236.29573514632546
+      },
+      "registered_modules": [
+        "model.23",
+        "model.24",
+        "model.25"
+      ],
+      "batch_count_per_run": 10,
+      "epochs_per_run": 5,
+      "optimizer_steps_per_run": 10,
+      "writer_event_count": 180,
+      "setup_transient_sanitization_count_per_run": 9,
+      "pair_equivalence": "PASS",
+      "purpose": "integration cross-check; not a replacement formal overhead verdict"
+    }
+  },
+  "dashboard": {
+    "status": "PASS",
+    "health_status": 200,
+    "html_contains_dashboard": true,
+    "api_event_count": 1000,
+    "api_families": [
+      "latent",
+      "moe",
+      "mot"
+    ]
+  },
+  "event_count": 1040,
+  "methodology": {
+    "conditions": [
+      "off",
+      "capture_jsonl"
+    ],
+    "order": "balanced AB/BA by pair",
+    "warmup_pairs": 2,
+    "measured_pairs": 6,
+    "timed_epoch_window": "sum of each on_train_epoch_start through on_train_epoch_end window, including dataloader iteration, preprocess, detection loss, backward, optimizer steps, event JSON encoding/write/flush",
+    "full_lifecycle_window": "trainer construction through train completion",
+    "determinism": "same pair seed; stochastic geometric/color augmentation disabled; raw collated batch hashes must match",
+    "equivalence": "initial/final model, optimizer and EMA hashes; raw batch hashes; loss items; optimizer step count",
+    "checkpoint_policy": "checkpoint serialization suppressed in the harness; official dataloader, preprocess, loss, backward, optimizer and callback loop retained",
+    "latent_setup_guard": "clear only non-leaf _last_routing_logits/probs/summary snapshots after model construction so ModelEMA deepcopy can start; records are stored per run"
+  },
+  "interpretation": "Integration evidence only. The preregistered 108-pair strengthened run remains the formal <10% overhead verdict.",
+  "limitations": [
+    "CPU-only, five coco8 train epochs per execution, batch=2, imgsz=64.",
+    "The configured measured pairs are descriptive and intentionally not used for a new confidence-bound verdict.",
+    "Validation, checkpoint serialization, CUDA, AMP and multi-epoch convergence are outside this cross-check.",
+    "The frozen Latent model cannot enter ModelEMA deepcopy without clearing nine constructor-time non-leaf routing snapshot fields; this harness records and applies that setup guard without changing state_dict parameters."
+  ]
+}

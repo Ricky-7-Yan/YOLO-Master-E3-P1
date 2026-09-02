@@ -1,0 +1,956 @@
+{
+  "generated_at": "2026-09-03T00:38:46+08:00",
+  "event_count": 1040,
+  "families": {
+    "latent": {
+      "events": 240,
+      "modules": 3,
+      "mean_entropy": 1.0,
+      "mean_gini": 0.0
+    },
+    "moe": {
+      "events": 480,
+      "modules": 6,
+      "mean_entropy": 0.9997800517573987,
+      "mean_gini": 0.01588413640116304
+    },
+    "mot": {
+      "events": 320,
+      "modules": 4,
+      "mean_entropy": 0.9777642128307025,
+      "mean_gini": 0.10445205319498241
+    }
+  },
+  "aggregates": [
+    {
+      "family": "latent",
+      "module": "model.23",
+      "num_experts": 4,
+      "forward_observations": 80,
+      "sample_observations": 160,
+      "expert_load_mean": [
+        0.25,
+        0.25,
+        0.25,
+        0.25
+      ],
+      "expert_load_std": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "aggregate_metrics": {
+        "expert_load": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ],
+        "expert_load_sum": 1.0,
+        "entropy_nats": 1.3862943611198906,
+        "entropy_normalized": 1.0,
+        "load_gini": 0.0,
+        "dominant_expert_share": 0.25
+      },
+      "per_forward_metric_stats": {
+        "entropy_normalized": {
+          "mean": 1.0,
+          "std": 0.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "load_gini": {
+          "mean": 0.0,
+          "std": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "dominant_expert_share": {
+          "mean": 0.25,
+          "std": 0.0,
+          "min": 0.25,
+          "max": 0.25
+        }
+      },
+      "mixing_weight_states": [
+        "observed"
+      ],
+      "aux_loss_states": [
+        "observed"
+      ]
+    },
+    {
+      "family": "latent",
+      "module": "model.24",
+      "num_experts": 4,
+      "forward_observations": 80,
+      "sample_observations": 160,
+      "expert_load_mean": [
+        0.25,
+        0.25,
+        0.25,
+        0.25
+      ],
+      "expert_load_std": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "aggregate_metrics": {
+        "expert_load": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ],
+        "expert_load_sum": 1.0,
+        "entropy_nats": 1.3862943611198906,
+        "entropy_normalized": 1.0,
+        "load_gini": 0.0,
+        "dominant_expert_share": 0.25
+      },
+      "per_forward_metric_stats": {
+        "entropy_normalized": {
+          "mean": 1.0,
+          "std": 0.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "load_gini": {
+          "mean": 0.0,
+          "std": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "dominant_expert_share": {
+          "mean": 0.25,
+          "std": 0.0,
+          "min": 0.25,
+          "max": 0.25
+        }
+      },
+      "mixing_weight_states": [
+        "observed"
+      ],
+      "aux_loss_states": [
+        "observed"
+      ]
+    },
+    {
+      "family": "latent",
+      "module": "model.25",
+      "num_experts": 4,
+      "forward_observations": 80,
+      "sample_observations": 160,
+      "expert_load_mean": [
+        0.25,
+        0.25,
+        0.25,
+        0.25
+      ],
+      "expert_load_std": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "aggregate_metrics": {
+        "expert_load": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ],
+        "expert_load_sum": 1.0,
+        "entropy_nats": 1.3862943611198906,
+        "entropy_normalized": 1.0,
+        "load_gini": 0.0,
+        "dominant_expert_share": 0.25
+      },
+      "per_forward_metric_stats": {
+        "entropy_normalized": {
+          "mean": 1.0,
+          "std": 0.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "load_gini": {
+          "mean": 0.0,
+          "std": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "dominant_expert_share": {
+          "mean": 0.25,
+          "std": 0.0,
+          "min": 0.25,
+          "max": 0.25
+        }
+      },
+      "mixing_weight_states": [
+        "observed"
+      ],
+      "aux_loss_states": [
+        "observed"
+      ]
+    },
+    {
+      "family": "moe",
+      "module": "model.4.m.0.0.mlp",
+      "num_experts": 4,
+      "forward_observations": 80,
+      "sample_observations": 160,
+      "expert_load_mean": [
+        0.24163352577516511,
+        0.2421117823396821,
+        0.2590824584210422,
+        0.25717223346411044
+      ],
+      "expert_load_std": [
+        0.08142531283411941,
+        0.08595750583324246,
+        0.0770299894726787,
+        0.07948949676585505
+      ],
+      "aggregate_metrics": {
+        "expert_load": [
+          0.24163352577516514,
+          0.24211178233968214,
+          0.25908245842104227,
+          0.2571722334641105
+        ],
+        "expert_load_sum": 1.0,
+        "entropy_nats": 1.3857620674923965,
+        "entropy_normalized": 0.9996160313116588,
+        "load_gini": 0.0168518122655148,
+        "dominant_expert_share": 0.25908245842104227
+      },
+      "per_forward_metric_stats": {
+        "entropy_normalized": {
+          "mean": 0.9567023566730846,
+          "std": 0.040118201439921,
+          "min": 0.792481250360578,
+          "max": 1.0
+        },
+        "load_gini": {
+          "mean": 0.1500345550308843,
+          "std": 0.05734587544161981,
+          "min": 0.0,
+          "max": 0.25
+        },
+        "dominant_expert_share": {
+          "mean": 0.3240556290042159,
+          "std": 0.026649691452819462,
+          "min": 0.25,
+          "max": 0.36400458216667175
+        }
+      },
+      "mixing_weight_states": [
+        "observed"
+      ],
+      "aux_loss_states": [
+        "observed",
+        "unavailable"
+      ]
+    },
+    {
+      "family": "moe",
+      "module": "model.4.m.0.1.mlp",
+      "num_experts": 4,
+      "forward_observations": 80,
+      "sample_observations": 160,
+      "expert_load_mean": [
+        0.252861558035229,
+        0.242842595821406,
+        0.24963808222091655,
+        0.25465776392244843
+      ],
+      "expert_load_std": [
+        0.07883754078030586,
+        0.08643574714752127,
+        0.0783213301741071,
+        0.09450616822279068
+      ],
+      "aggregate_metrics": {
+        "expert_load": [
+          0.25286155803522903,
+          0.24284259582140602,
+          0.24963808222091657,
+          0.2546577639224485
+        ],
+        "expert_load_sum": 1.0,
+        "entropy_nats": 1.3861312127000378,
+        "entropy_normalized": 0.9998823132918748,
+        "load_gini": 0.009667245029360005,
+        "dominant_expert_share": 0.2546577639224485
+      },
+      "per_forward_metric_stats": {
+        "entropy_normalized": {
+          "mean": 0.9525065308428655,
+          "std": 0.04375481394439138,
+          "min": 0.792481250360578,
+          "max": 1.0
+        },
+        "load_gini": {
+          "mean": 0.15648270599538855,
+          "std": 0.05869843694260472,
+          "min": 0.0,
+          "max": 0.25
+        },
+        "dominant_expert_share": {
+          "mean": 0.32951748361771793,
+          "std": 0.03350232311204392,
+          "min": 0.25,
+          "max": 0.43172682381897465
+        }
+      },
+      "mixing_weight_states": [
+        "observed"
+      ],
+      "aux_loss_states": [
+        "observed",
+        "unavailable"
+      ]
+    },
+    {
+      "family": "moe",
+      "module": "model.6.m.0.0.mlp",
+      "num_experts": 8,
+      "forward_observations": 80,
+      "sample_observations": 160,
+      "expert_load_mean": [
+        0.13180696077860288,
+        0.12213393596538002,
+        0.12792216289129124,
+        0.12278089300466688,
+        0.12912287941908157,
+        0.12577683880910356,
+        0.11825518623349678,
+        0.12220114289837705
+      ],
+      "expert_load_std": [
+        0.028664554057061354,
+        0.031205408121831372,
+        0.02655759981711913,
+        0.03567977072374006,
+        0.02504956936029765,
+        0.029241555816628902,
+        0.038766525030581804,
+        0.0417213951918507
+      ],
+      "aggregate_metrics": {
+        "expert_load": [
+          0.13180696077860288,
+          0.12213393596538002,
+          0.12792216289129124,
+          0.12278089300466688,
+          0.12912287941908157,
+          0.12577683880910356,
+          0.11825518623349678,
+          0.12220114289837705
+        ],
+        "expert_load_sum": 1.0,
+        "entropy_nats": 2.078886087406026,
+        "entropy_normalized": 0.9997328829579115,
+        "load_gini": 0.01874576810842865,
+        "dominant_expert_share": 0.13180696077860288
+      },
+      "per_forward_metric_stats": {
+        "entropy_normalized": {
+          "mean": 0.979588503420667,
+          "std": 0.016001047143868952,
+          "min": 0.9310321553976012,
+          "max": 1.0
+        },
+        "load_gini": {
+          "mean": 0.10577483424842202,
+          "std": 0.045475988782761594,
+          "min": 0.0,
+          "max": 0.2987918680443753
+        },
+        "dominant_expert_share": {
+          "mean": 0.1480332176170674,
+          "std": 0.023929768553455542,
+          "min": 0.125,
+          "max": 0.25783834053455545
+        }
+      },
+      "mixing_weight_states": [
+        "observed"
+      ],
+      "aux_loss_states": [
+        "observed",
+        "unavailable"
+      ]
+    },
+    {
+      "family": "moe",
+      "module": "model.6.m.0.1.mlp",
+      "num_experts": 8,
+      "forward_observations": 80,
+      "sample_observations": 160,
+      "expert_load_mean": [
+        0.1210891353021322,
+        0.1269070325876692,
+        0.12627479741504694,
+        0.12885608617794558,
+        0.12532154023914974,
+        0.12397041990419015,
+        0.1254090384223765,
+        0.12217194995148972
+      ],
+      "expert_load_std": [
+        0.03187258620498624,
+        0.031671036225523905,
+        0.027135958145349352,
+        0.03742243147185372,
+        0.028884452730665346,
+        0.028683310728610432,
+        0.03403021370766182,
+        0.029050599151508375
+      ],
+      "aggregate_metrics": {
+        "expert_load": [
+          0.1210891353021322,
+          0.1269070325876692,
+          0.12627479741504694,
+          0.12885608617794558,
+          0.12532154023914974,
+          0.12397041990419015,
+          0.1254090384223765,
+          0.12217194995148972
+        ],
+        "expert_load_sum": 1.0,
+        "entropy_nats": 2.079262317585398,
+        "entropy_normalized": 0.999913811429249,
+        "load_gini": 0.010630587503423605,
+        "dominant_expert_share": 0.12885608617794558
+      },
+      "per_forward_metric_stats": {
+        "entropy_normalized": {
+          "mean": 0.9821055580343081,
+          "std": 0.012159603338453003,
+          "min": 0.9357849740192014,
+          "max": 1.0
+        },
+        "load_gini": {
+          "mean": 0.10277538518715204,
+          "std": 0.038712886503691396,
+          "min": 0.0,
+          "max": 0.19821972290844148
+        },
+        "dominant_expert_share": {
+          "mean": 0.14713226498304038,
+          "std": 0.021068517867248532,
+          "min": 0.125,
+          "max": 0.23899751545492537
+        }
+      },
+      "mixing_weight_states": [
+        "observed"
+      ],
+      "aux_loss_states": [
+        "observed",
+        "unavailable"
+      ]
+    },
+    {
+      "family": "moe",
+      "module": "model.8.m.0.0.mlp",
+      "num_experts": 16,
+      "forward_observations": 80,
+      "sample_observations": 160,
+      "expert_load_mean": [
+        0.06147150966064737,
+        0.06470383576173526,
+        0.06241892080290525,
+        0.06314664136241999,
+        0.05777847422669916,
+        0.06436983405958557,
+        0.06151770719171704,
+        0.06254981158725233,
+        0.06429795630560349,
+        0.05995971022947584,
+        0.0679270619275479,
+        0.06070000647734418,
+        0.06318614357877375,
+        0.05858900965860413,
+        0.06511948356251436,
+        0.062263893607174624
+      ],
+      "expert_load_std": [
+        0.012315739622045012,
+        0.008404759145240824,
+        0.014230756806774757,
+        0.011624712783715291,
+        0.013695947931095808,
+        0.009725290664547338,
+        0.011031403689871497,
+        0.010331312226645831,
+        0.012420345811219308,
+        0.014355292194657103,
+        0.014215132165064355,
+        0.012619102666619088,
+        0.01082097133069947,
+        0.01393415883109137,
+        0.01408835366560489,
+        0.012655908876324137
+      ],
+      "aggregate_metrics": {
+        "expert_load": [
+          0.06147150966064737,
+          0.06470383576173526,
+          0.06241892080290525,
+          0.06314664136241999,
+          0.05777847422669916,
+          0.06436983405958557,
+          0.06151770719171704,
+          0.06254981158725233,
+          0.06429795630560349,
+          0.05995971022947584,
+          0.0679270619275479,
+          0.06070000647734418,
+          0.06318614357877375,
+          0.05858900965860413,
+          0.06511948356251436,
+          0.062263893607174624
+        ],
+        "expert_load_sum": 1.0,
+        "entropy_nats": 2.7718033774162105,
+        "entropy_normalized": 0.9997167467294117,
+        "load_gini": 0.022077827991165755,
+        "dominant_expert_share": 0.0679270619275479
+      },
+      "per_forward_metric_stats": {
+        "entropy_normalized": {
+          "mean": 0.991936896621221,
+          "std": 0.007436758817987575,
+          "min": 0.9612531706445585,
+          "max": 1.0
+        },
+        "load_gini": {
+          "mean": 0.06829255231500872,
+          "std": 0.053519177941803275,
+          "min": 0.0,
+          "max": 0.2562420675766519
+        },
+        "dominant_expert_share": {
+          "mean": 0.07089154047534663,
+          "std": 0.014753759462589642,
+          "min": 0.0625,
+          "max": 0.13170703197033437
+        }
+      },
+      "mixing_weight_states": [
+        "observed"
+      ],
+      "aux_loss_states": [
+        "observed",
+        "unavailable"
+      ]
+    },
+    {
+      "family": "moe",
+      "module": "model.8.m.0.1.mlp",
+      "num_experts": 16,
+      "forward_observations": 80,
+      "sample_observations": 160,
+      "expert_load_mean": [
+        0.060078684988316144,
+        0.06489289749825618,
+        0.06306756544320619,
+        0.06386698808538371,
+        0.059711221778082677,
+        0.06407736119292934,
+        0.06401608516864202,
+        0.06216769292854045,
+        0.0582971252196688,
+        0.061022713286583784,
+        0.06352902854741388,
+        0.06480404958111224,
+        0.06277801921723858,
+        0.0639389612871208,
+        0.060029865342211663,
+        0.06372174043529384
+      ],
+      "expert_load_std": [
+        0.012341394546507678,
+        0.013026660015152722,
+        0.011149088008641039,
+        0.014384964140667778,
+        0.012465010916258429,
+        0.01510235437760272,
+        0.013178417466749727,
+        0.012715676665855121,
+        0.013938924844310552,
+        0.012341006053502782,
+        0.013113648522929821,
+        0.011521590622656383,
+        0.009383018983476871,
+        0.013458162869409502,
+        0.012178436883055858,
+        0.008821624046932283
+      ],
+      "aggregate_metrics": {
+        "expert_load": [
+          0.06007868498831612,
+          0.06489289749825615,
+          0.06306756544320616,
+          0.06386698808538369,
+          0.05971122177808265,
+          0.06407736119292931,
+          0.06401608516864199,
+          0.06216769292854042,
+          0.058297125219668774,
+          0.061022713286583756,
+          0.06352902854741385,
+          0.06480404958111222,
+          0.06277801921723855,
+          0.06393896128712077,
+          0.060029865342211636,
+          0.06372174043529381
+        ],
+        "expert_load_sum": 0.9999999999999999,
+        "entropy_nats": 2.7720855662142307,
+        "entropy_normalized": 0.9998185248242862,
+        "load_gini": 0.017331577509085427,
+        "dominant_expert_share": 0.06489289749825615
+      },
+      "per_forward_metric_stats": {
+        "entropy_normalized": {
+          "mean": 0.9916962879967329,
+          "std": 0.007409238201929399,
+          "min": 0.9618274474448129,
+          "max": 1.0
+        },
+        "load_gini": {
+          "mean": 0.06726572647832027,
+          "std": 0.05045033397467007,
+          "min": 0.0,
+          "max": 0.24947359796000557
+        },
+        "dominant_expert_share": {
+          "mean": 0.07141192332880276,
+          "std": 0.016326125434108073,
+          "min": 0.0625,
+          "max": 0.14162927391132912
+        }
+      },
+      "mixing_weight_states": [
+        "observed"
+      ],
+      "aux_loss_states": [
+        "observed",
+        "unavailable"
+      ]
+    },
+    {
+      "family": "mot",
+      "module": "model.13.m.0",
+      "num_experts": 3,
+      "forward_observations": 80,
+      "sample_observations": 160,
+      "expert_load_mean": [
+        0.3689988216663423,
+        0.3596197314161176,
+        0.27138144691754024
+      ],
+      "expert_load_std": [
+        0.13458349714383655,
+        0.13596907502440952,
+        0.18386472109811303
+      ],
+      "aggregate_metrics": {
+        "expert_load": [
+          0.3689988216663423,
+          0.3596197314161176,
+          0.27138144691754024
+        ],
+        "expert_load_sum": 1.0,
+        "entropy_nats": 1.0896075506907184,
+        "entropy_normalized": 0.9918035342674819,
+        "load_gini": 0.06507824983253485,
+        "dominant_expert_share": 0.3689988216663423
+      },
+      "per_forward_metric_stats": {
+        "entropy_normalized": {
+          "mean": 0.8613696238038919,
+          "std": 0.11473078347892927,
+          "min": 0.6631773372130321,
+          "max": 0.9985156819481948
+        },
+        "load_gini": {
+          "mean": 0.22050015386797575,
+          "std": 0.08508200725598399,
+          "min": 0.03062526384989428,
+          "max": 0.32666715680001035
+        },
+        "dominant_expert_share": {
+          "mean": 0.4664246329221221,
+          "std": 0.04022082017981681,
+          "min": 0.35885441303253174,
+          "max": 0.49666826436912226
+        }
+      },
+      "mixing_weight_states": [
+        "observed"
+      ],
+      "aux_loss_states": [
+        "observed"
+      ]
+    },
+    {
+      "family": "mot",
+      "module": "model.16.m.0",
+      "num_experts": 3,
+      "forward_observations": 80,
+      "sample_observations": 160,
+      "expert_load_mean": [
+        0.25760032107725506,
+        0.4243631529098934,
+        0.3180365260128516
+      ],
+      "expert_load_std": [
+        0.17960183257203255,
+        0.08972456244899507,
+        0.18367005420713167
+      ],
+      "aggregate_metrics": {
+        "expert_load": [
+          0.25760032107725506,
+          0.4243631529098934,
+          0.3180365260128516
+        ],
+        "expert_load_sum": 1.0,
+        "entropy_nats": 1.0774838718515771,
+        "entropy_normalized": 0.9807680862170699,
+        "load_gini": 0.11117522122175916,
+        "dominant_expert_share": 0.4243631529098934
+      },
+      "per_forward_metric_stats": {
+        "entropy_normalized": {
+          "mean": 0.8279919926598044,
+          "std": 0.13785668086914324,
+          "min": 0.6631773027277003,
+          "max": 0.9999464997077503
+        },
+        "load_gini": {
+          "mean": 0.22104244373037646,
+          "std": 0.11358523811725899,
+          "min": 0.0051046210992946595,
+          "max": 0.3266672053250259
+        },
+        "dominant_expert_share": {
+          "mean": 0.45661504369143324,
+          "std": 0.055093558094908526,
+          "min": 0.33588581276280244,
+          "max": 0.4966677642054672
+        }
+      },
+      "mixing_weight_states": [
+        "observed"
+      ],
+      "aux_loss_states": [
+        "observed"
+      ]
+    },
+    {
+      "family": "mot",
+      "module": "model.19.m.0",
+      "num_experts": 3,
+      "forward_observations": 80,
+      "sample_observations": 160,
+      "expert_load_mean": [
+        0.4055573354135894,
+        0.40115494067117596,
+        0.19328772391523474
+      ],
+      "expert_load_std": [
+        0.15887229713751047,
+        0.1619662253512742,
+        0.21632248936000942
+      ],
+      "aggregate_metrics": {
+        "expert_load": [
+          0.4055573354135894,
+          0.40115494067117596,
+          0.19328772391523474
+        ],
+        "expert_load_sum": 1.0,
+        "entropy_nats": 1.0501135612801247,
+        "entropy_normalized": 0.9558545558899746,
+        "load_gini": 0.1415130743322368,
+        "dominant_expert_share": 0.4055573354135894
+      },
+      "per_forward_metric_stats": {
+        "entropy_normalized": {
+          "mean": 0.7414897093378843,
+          "std": 0.11486345285985902,
+          "min": 0.6631772446483862,
+          "max": 0.9985156919719872
+        },
+        "load_gini": {
+          "mean": 0.2855782085187275,
+          "std": 0.07524059241814098,
+          "min": 0.03062514464060473,
+          "max": 0.32666696131228523
+        },
+        "dominant_expert_share": {
+          "mean": 0.4836511451368747,
+          "std": 0.03276123542438048,
+          "min": 0.35885435342788696,
+          "max": 0.4966670722762623
+        }
+      },
+      "mixing_weight_states": [
+        "observed"
+      ],
+      "aux_loss_states": [
+        "observed"
+      ]
+    },
+    {
+      "family": "mot",
+      "module": "model.22.m.0",
+      "num_experts": 3,
+      "forward_observations": 80,
+      "sample_observations": 160,
+      "expert_load_mean": [
+        0.2761666660924238,
+        0.42622916718252213,
+        0.2976041667250537
+      ],
+      "expert_load_std": [
+        0.3488562575658875,
+        0.4207010114423626,
+        0.3742645666898583
+      ],
+      "aggregate_metrics": {
+        "expert_load": [
+          0.2761666660924239,
+          0.4262291671825223,
+          0.2976041667250538
+        ],
+        "expert_load_sum": 1.0,
+        "entropy_nats": 1.079530134720423,
+        "entropy_normalized": 0.9826306749482833,
+        "load_gini": 0.10004166739339881,
+        "dominant_expert_share": 0.4262291671825223
+      },
+      "per_forward_metric_stats": {
+        "entropy_normalized": {
+          "mean": 0.329278111955692,
+          "std": 0.3077921089689766,
+          "min": 0.07286692958938779,
+          "max": 0.9484774998804617
+        },
+        "load_gini": {
+          "mean": 0.5379791692495056,
+          "std": 0.15096948072713798,
+          "min": 0.1633333365122478,
+          "max": 0.6533333368723591
+        },
+        "dominant_expert_share": {
+          "mean": 0.8335416690106066,
+          "std": 0.19417312627554578,
+          "min": 0.4966666668389613,
+          "max": 0.9866666692743699
+        }
+      },
+      "mixing_weight_states": [
+        "observed"
+      ],
+      "aux_loss_states": [
+        "observed"
+      ]
+    }
+  ],
+  "recent_events": [
+    {
+      "family": "latent",
+      "module": "model.23",
+      "entropy": 1.0,
+      "gini": 0.0,
+      "sample_indices": null
+    },
+    {
+      "family": "latent",
+      "module": "model.24",
+      "entropy": 1.0,
+      "gini": 0.0,
+      "sample_indices": null
+    },
+    {
+      "family": "latent",
+      "module": "model.25",
+      "entropy": 1.0,
+      "gini": 0.0,
+      "sample_indices": null
+    },
+    {
+      "family": "latent",
+      "module": "model.23",
+      "entropy": 1.0,
+      "gini": 0.0,
+      "sample_indices": null
+    },
+    {
+      "family": "latent",
+      "module": "model.24",
+      "entropy": 1.0,
+      "gini": 0.0,
+      "sample_indices": null
+    },
+    {
+      "family": "latent",
+      "module": "model.25",
+      "entropy": 1.0,
+      "gini": 0.0,
+      "sample_indices": null
+    },
+    {
+      "family": "latent",
+      "module": "model.23",
+      "entropy": 1.0,
+      "gini": 0.0,
+      "sample_indices": null
+    },
+    {
+      "family": "latent",
+      "module": "model.24",
+      "entropy": 1.0,
+      "gini": 0.0,
+      "sample_indices": null
+    },
+    {
+      "family": "latent",
+      "module": "model.25",
+      "entropy": 1.0,
+      "gini": 0.0,
+      "sample_indices": null
+    },
+    {
+      "family": "latent",
+      "module": "model.23",
+      "entropy": 1.0,
+      "gini": 0.0,
+      "sample_indices": null
+    },
+    {
+      "family": "latent",
+      "module": "model.24",
+      "entropy": 1.0,
+      "gini": 0.0,
+      "sample_indices": null
+    },
+    {
+      "family": "latent",
+      "module": "model.25",
+      "entropy": 1.0,
+      "gini": 0.0,
+      "sample_indices": null
+    }
+  ]
+}

@@ -16,25 +16,41 @@ from typing import Any
 from e3_p0.aggregation import aggregate_events
 
 
+def load_jsonl_window(path: Path, *, limit: int = 1000) -> tuple[list[dict[str, Any]], int]:
+    """Read the newest JSON objects and return both the window and valid source count.
+
+    A partial final line is expected while a writer is active and is ignored. Corruption in
+    any earlier non-empty line is surfaced instead of silently removing evidence.
+    """
+
+    if not path.is_file():
+        return [], 0
+    if limit <= 0:
+        raise ValueError("limit must be positive")
+    lines = [(number, line) for number, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1) if line.strip()]
+    records: list[dict[str, Any]] = []
+    for index, (line_number, line) in enumerate(lines):
+        try:
+            value = json.loads(line)
+        except json.JSONDecodeError as exc:
+            if index == len(lines) - 1:
+                break
+            raise ValueError(f"Invalid JSONL before final line at {path}:{line_number}") from exc
+        if isinstance(value, dict):
+            records.append(value)
+    return records[-limit:], len(records)
+
+
 def load_jsonl(path: Path, *, limit: int = 1000) -> list[dict[str, Any]]:
     """Read the newest valid JSON objects without failing on a partial final line."""
 
-    if not path.is_file():
-        return []
-    records = []
-    for line in path.read_text(encoding="utf-8").splitlines():
-        if not line.strip():
-            continue
-        try:
-            value = json.loads(line)
-        except json.JSONDecodeError:
-            continue
-        if isinstance(value, dict):
-            records.append(value)
-    return records[-limit:]
+    records, _ = load_jsonl_window(path, limit=limit)
+    return records
 
 
-def build_snapshot(events: list[dict[str, Any]]) -> dict[str, Any]:
+def build_snapshot(
+    events: list[dict[str, Any]], *, source_event_count: int | None = None, window_limit: int | None = None
+) -> dict[str, Any]:
     """Build one compact dashboard API payload from routing events."""
 
     aggregates = aggregate_events(events) if events else []
@@ -57,9 +73,15 @@ def build_snapshot(events: list[dict[str, Any]]) -> dict[str, Any]:
                 else None
             ),
         }
+    source_count = len(events) if source_event_count is None else source_event_count
+    if source_count < len(events):
+        raise ValueError("source_event_count cannot be smaller than the returned event window")
     return {
         "generated_at": datetime.now().astimezone().isoformat(timespec="seconds"),
         "event_count": len(events),
+        "source_event_count": source_count,
+        "window_limit": window_limit,
+        "truncated": source_count > len(events),
         "families": families,
         "aggregates": aggregates,
         "recent_events": [
@@ -99,7 +121,8 @@ table{{width:100%;border-collapse:collapse}} th,td{{padding:9px;border-bottom:1p
 <script>
 const fmt=v=>v==null?'—':Number(v).toFixed(3); const esc=s=>String(s??'').replace(/[&<>\"]/g,c=>({{'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;'}}[c]));
 async function refresh(){{const r=await fetch('/api/snapshot',{{cache:'no-store'}});const d=await r.json();
-document.querySelector('#cards').innerHTML=`<div class="card"><div class="value">${{d.event_count}}</div><div class="label">Events in stream</div></div>`+Object.entries(d.families).map(([n,v])=>`<div class="card"><div class="value">${{n.toUpperCase()}}</div><div class="label">${{v.modules}} modules · H ${{fmt(v.mean_entropy)}} · G ${{fmt(v.mean_gini)}}</div></div>`).join('');
+const eventLabel=d.truncated?`Events in window · ${{d.source_event_count}} total`:'Events in stream';
+document.querySelector('#cards').innerHTML=`<div class="card"><div class="value">${{d.event_count}}</div><div class="label">${{eventLabel}}</div></div>`+Object.entries(d.families).map(([n,v])=>`<div class="card"><div class="value">${{n.toUpperCase()}}</div><div class="label">${{v.modules}} modules · H ${{fmt(v.mean_entropy)}} · G ${{fmt(v.mean_gini)}}</div></div>`).join('');
 document.querySelector('#modules').innerHTML=d.aggregates.map(x=>`<tr><td>${{esc(x.family.toUpperCase())}}</td><td>${{esc(x.module)}}</td><td><div class="bar"><div class="fill" style="width:${{100*x.aggregate_metrics.entropy_normalized}}%"></div></div>${{fmt(x.aggregate_metrics.entropy_normalized)}}</td><td>${{fmt(x.aggregate_metrics.load_gini)}}</td><td>${{fmt(x.aggregate_metrics.dominant_expert_share)}}</td></tr>`).join('');
 document.querySelector('#recent').innerHTML=d.recent_events.slice().reverse().map(x=>`<tr><td>${{esc((x.family||'').toUpperCase())}}</td><td>${{esc(x.module)}}</td><td>${{esc((x.sample_indices||[]).join(','))}}</td></tr>`).join('');}}
 refresh();setInterval(refresh,{refresh_ms});
@@ -136,7 +159,9 @@ class DashboardHandler(BaseHTTPRequestHandler):
             self._send(b'{"status":"ok"}\n', "application/json")
             return
         if self.path == "/api/snapshot":
-            body = json.dumps(build_snapshot(load_jsonl(self.server.source)), ensure_ascii=False).encode("utf-8")
+            events, source_event_count = load_jsonl_window(self.server.source)
+            snapshot = build_snapshot(events, source_event_count=source_event_count, window_limit=1000)
+            body = json.dumps(snapshot, ensure_ascii=False).encode("utf-8")
             self._send(body, "application/json; charset=utf-8")
             return
         self._send(b"not found\n", "text/plain; charset=utf-8", HTTPStatus.NOT_FOUND)
@@ -168,6 +193,9 @@ def smoke_test_server(source: Path) -> dict[str, Any]:
         "health_status": health_status,
         "html_contains_dashboard": "YOLO-Master E3 Routing Dashboard" in html,
         "api_event_count": snapshot["event_count"],
+        "api_source_event_count": snapshot["source_event_count"],
+        "api_window_limit": snapshot["window_limit"],
+        "api_truncated": snapshot["truncated"],
         "api_families": sorted(snapshot["families"]),
     }
 

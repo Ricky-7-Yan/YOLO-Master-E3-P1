@@ -108,7 +108,6 @@ def save_engine_crosscheck_plot(families: dict[str, dict[str, Any]], path: Path,
     x = np.arange(len(names))
     figure, axes = plt.subplots(1, 2, figsize=(13.5, 5.4), constrained_layout=True)
     values = [families[name]["epoch_window_slowdown_percent"]["values"] for name in names]
-    medians = [families[name]["epoch_window_slowdown_percent"]["median"] for name in names]
     axes[0].boxplot(values, tick_labels=[name.upper() for name in names], showmeans=True)
     for index, samples in enumerate(values, start=1):
         axes[0].scatter(np.full(len(samples), index), samples, color="#2F6FAE", s=24, zorder=3)
@@ -120,8 +119,8 @@ def save_engine_crosscheck_plot(families: dict[str, dict[str, Any]], path: Path,
     axes[0].legend()
 
     event_counts = [families[name]["writer_event_count"] for name in names]
-    colors = ["#50A47B" if median < target_percent else "#C83E4D" for median in medians]
-    axes[1].bar(x, event_counts, color=colors)
+    # Event volume is an integrity metric, not a pass/fail result for the descriptive timing panel.
+    axes[1].bar(x, event_counts, color=["#3B82F6", "#14B8A6", "#8B5CF6"])
     axes[1].set_xticks(x, [name.upper() for name in names])
     axes[1].set_ylabel("Trainer-generated JSONL events")
     axes[1].set_title("Writer stream consumed by dashboard HTTP API")
