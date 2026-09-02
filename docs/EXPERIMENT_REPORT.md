@@ -60,7 +60,9 @@
 
 5-epoch epoch-window 的中位 slowdown 为 MoE `4.948%`、MoT `-33.209%`、Latent `13.629%`；逐对总范围约 `-84%～+284%`。正负极端同时出现，说明本机 CPU、coco8 每 epoch 仅 2 batch 的调度噪声仍显著高于观察器增量。这里不能据 Latent 中位数判正式失败，也不能据 MoT 负值声称加速；正式 P1 开销结论仍由预注册、重复数更高且带 bootstrap CI 的 108 对加强实验给出。
 
-![Trainer 集成交叉验证](../artifacts/p1-engine/p1e-20260903-cpu-trainer-v3/trainer-epoch-crosscheck.png)
+![Trainer 集成交叉验证](assets/trainer-epoch-crosscheck-neutral.png)
+
+报告图由同一 `summary.json` 重绘；右侧事件数量使用中性 family 配色，避免把事件量错误解释为 `<10%` 判据。运行目录中的原始生成图保持不变。
 
 证据索引：[`summary.json`](../artifacts/p1-engine/p1e-20260903-cpu-trainer-v3/summary.json)、[`trainer-runs.jsonl`](../artifacts/p1-engine/p1e-20260903-cpu-trainer-v3/trainer-runs.jsonl)、[`routing-engine-all.jsonl`](../artifacts/p1-engine/p1e-20260903-cpu-trainer-v3/routing-engine-all.jsonl)、[`runtime-inputs.json`](../artifacts/p1-engine/p1e-20260903-cpu-trainer-v3/runtime-inputs.json)、[`manifest.sha256.json`](../artifacts/p1-engine/p1e-20260903-cpu-trainer-v3/manifest.sha256.json)。
 
