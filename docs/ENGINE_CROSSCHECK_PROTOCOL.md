@@ -38,3 +38,9 @@
 6 对/族只用于描述真实 Trainer 集成后的量级和发现异常，不计算新的置信区间，也不产生新的正式 `<10%` 结论。正式结论仍以 `p1s-20260901-cpu-fullstep-v1` 的 108 个 preregistered pair 为准，避免用更小样本事后替换既有判据。
 
 运行时若存在 `.git`，同时核对官方 commit/tree 和关键文件哈希；当前官方源码为无 `.git` 的冻结快照，因此强制核对 Trainer、detect trainer、routing protocol 和三份模型 YAML 的预注册 SHA-256。
+
+## 已知 Latent 启动缺陷与限定处理
+
+冻结源码的 Latent 模型在构造时为 stride 推断执行 forward，三个 `LatentMixture` 各保留 `_last_routing_logits`、`_last_routing_probs`、`_last_routing_summary` 非叶张量。官方 `_setup_train` 随后的 `ModelEMA(deepcopy(model))` 因而无法启动；该问题在全新 Python 进程中也可复现，不是 P1 hook 或跨族污染。
+
+证据 Trainer 只在 `get_model` 返回后清空这 9 个临时快照字段，并逐项记录 module、字段、shape 以及它是否属于 `state_dict`。限定条件是：仅清理上述三种字段、仅清理非叶 tensor、不得改动参数或 buffer；同一 pair 的 off/on 清理清单必须完全一致。正式训练的首个 forward 会重新发布当前快照。

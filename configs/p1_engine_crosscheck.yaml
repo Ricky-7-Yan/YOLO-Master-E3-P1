@@ -1,4 +1,4 @@
-run_id: p1e-20260903-cpu-trainer-v1
+run_id: p1e-20260903-cpu-trainer-v2
 
 runtime_root: ../YOLO-Master-main-07d3303
 p0_repo_root: ../YOLO-Master-E3-P0

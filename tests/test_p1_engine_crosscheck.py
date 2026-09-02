@@ -7,6 +7,7 @@ import torch
 
 from e3_p1.engine_crosscheck import (
     _assert_pair_equivalence,
+    _clear_nonleaf_latent_transients,
     _condition_order,
     _hash_value,
     _load_engine_config,
@@ -61,6 +62,7 @@ def _row() -> dict:
         "final_ema_sha256": "e",
         "optimizer_steps": 2,
         "batch_count": 2,
+        "sanitized_transients": [],
         "batches": [{"raw_batch_sha256": "f"}, {"raw_batch_sha256": "g"}],
         "loss_items": [1.0, 2.0],
     }
@@ -73,3 +75,30 @@ def test_pair_equivalence_hard_fails_on_final_state_change():
     observed["final_model_sha256"] = "changed"
     with pytest.raises(RuntimeError, match="final_model_sha256"):
         _assert_pair_equivalence(off, observed, family="toy", pair_index=0)
+
+
+class _TransientModule(torch.nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.weight = torch.nn.Parameter(torch.tensor([2.0]))
+        self._last_routing_logits = self.weight * 2
+        self._last_routing_probs = None
+        self._last_routing_summary = None
+
+
+def test_latent_setup_guard_only_clears_nonleaf_snapshot_fields():
+    model = _TransientModule()
+    before = dict(model.state_dict())
+    records = _clear_nonleaf_latent_transients(model)
+    assert records == [
+        {
+            "module": "",
+            "type": "_TransientModule",
+            "field": "_last_routing_logits",
+            "shape": [1],
+            "state_dict_member": False,
+        }
+    ]
+    assert model._last_routing_logits is None
+    assert model.state_dict().keys() == before.keys()
+    assert torch.equal(model.state_dict()["weight"], before["weight"])

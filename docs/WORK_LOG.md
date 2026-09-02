@@ -55,3 +55,5 @@
 - 修复为预注册并核对 Trainer、detect trainer、routing protocol 和三份模型 YAML 的 SHA-256；若运行目录未来带 `.git`，还会同时校验 commit/tree。
 - 第二次 MoT 预检完成 2 对 AB/BA、4 次真实 epoch。每次 2 个 batch、2 次 optimizer update；输入、loss、模型、optimizer 和 EMA 轨迹均等价，产生 16 条连续事件，dashboard HTTP smoke 通过。
 - 冻结三族正式交叉验证协议：每族 2 对 warmup + 6 对 measured；小样本数字只作描述，不替换正式开销结论。
+- 第一次三族运行完成 MoE 与 MoT 后在 Latent `ModelEMA(deepcopy)` 启动阶段失败；单独新进程复现同样错误，排除跨族残留。
+- 属性检查定位到三个 `LatentMixture` 共 9 个 constructor forward 遗留的非叶 `_last_routing_*` 张量。证据 harness 增加限定 setup guard：只清空这些不属于 `state_dict` 的瞬时快照，并把逐项清单纳入 off/on 等价性检查。

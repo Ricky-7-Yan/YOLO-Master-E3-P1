@@ -29,6 +29,7 @@ from .strengthened import _validate_event_stream, _writer_callback
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 RUN_ID_PATTERN = re.compile(r"[A-Za-z0-9][A-Za-z0-9._-]{0,127}")
 CONDITIONS = ("off", "capture_jsonl")
+LATENT_TRANSIENT_FIELDS = ("_last_routing_logits", "_last_routing_probs", "_last_routing_summary")
 
 
 def _load_engine_config(config_path: Path, run_id_override: str | None = None) -> dict[str, Any]:
@@ -85,6 +86,27 @@ def _hash_value(value: Any) -> str:
 
 def _state_sha256(stateful: Any) -> str:
     return _hash_value(stateful.state_dict())
+
+
+def _clear_nonleaf_latent_transients(model: Any) -> list[dict[str, Any]]:
+    """Clear constructor-time Latent snapshots that prevent ModelEMA deepcopy."""
+
+    cleared = []
+    for module_name, module in model.named_modules():
+        for field in LATENT_TRANSIENT_FIELDS:
+            value = getattr(module, field, None)
+            if hasattr(value, "is_leaf") and not bool(value.is_leaf):
+                cleared.append(
+                    {
+                        "module": module_name,
+                        "type": type(module).__name__,
+                        "field": field,
+                        "shape": list(value.shape),
+                        "state_dict_member": field in module.state_dict(),
+                    }
+                )
+                setattr(module, field, None)
+    return cleared
 
 
 def _logger(path: Path) -> logging.Logger:
@@ -273,6 +295,7 @@ def _assert_pair_equivalence(off: dict[str, Any], observed: dict[str, Any], *, f
         "final_ema_sha256",
         "optimizer_steps",
         "batch_count",
+        "sanitized_transients",
     )
     for field in exact_fields:
         if off[field] != observed[field]:
@@ -383,6 +406,7 @@ def _run_condition(
             "amp_enabled": bool(trainer.amp),
             "device": str(trainer.device),
             "registered_modules": observer.registered_modules,
+            "sanitized_transients": list(getattr(trainer, "evidence_sanitized_transients", [])),
             "event_validation": event_validation,
             "initial_model_sha256": observer.initial_model_sha256,
             "initial_optimizer_sha256": observer.initial_optimizer_sha256,
@@ -431,6 +455,7 @@ def _family_summary(rows: list[dict[str, Any]], *, measured_pairs: int) -> dict[
         "batch_count_per_run": observed_rows[0]["batch_count"],
         "optimizer_steps_per_run": observed_rows[0]["optimizer_steps"],
         "writer_event_count": sum(row["event_validation"]["actual_count"] for row in observed_rows),
+        "setup_transient_sanitization_count_per_run": len(observed_rows[0]["sanitized_transients"]),
         "pair_equivalence": "PASS",
         "purpose": "integration cross-check; not a replacement formal overhead verdict",
     }
@@ -494,6 +519,11 @@ def run(
 
             def save_model(self) -> bool:
                 return False
+
+            def get_model(self, cfg: str | None = None, weights: str | None = None, verbose: bool = True) -> Any:
+                model = super().get_model(cfg=cfg, weights=weights, verbose=verbose)
+                self.evidence_sanitized_transients = _clear_nonleaf_latent_transients(model)
+                return model
 
         write_json(
             run_dir / "environment.json",
@@ -581,12 +611,14 @@ def run(
                 "determinism": "same pair seed; stochastic geometric/color augmentation disabled; raw collated batch hashes must match",
                 "equivalence": "initial/final model, optimizer and EMA hashes; raw batch hashes; loss items; optimizer step count",
                 "checkpoint_policy": "checkpoint serialization suppressed in the harness; official dataloader, preprocess, loss, backward, optimizer and callback loop retained",
+                "latent_setup_guard": "clear only non-leaf _last_routing_logits/probs/summary snapshots after model construction so ModelEMA deepcopy can start; records are stored per run",
             },
             "interpretation": "Integration evidence only. The preregistered 108-pair strengthened run remains the formal <10% overhead verdict.",
             "limitations": [
                 "CPU-only, one coco8 train epoch per execution, batch=2, imgsz=64.",
                 "The configured measured pairs are descriptive and intentionally not used for a new confidence-bound verdict.",
                 "Validation, checkpoint serialization, CUDA, AMP and multi-epoch convergence are outside this cross-check.",
+                "The frozen Latent model cannot enter ModelEMA deepcopy without clearing nine constructor-time non-leaf routing snapshot fields; this harness records and applies that setup guard without changing state_dict parameters.",
             ],
         }
         write_json(run_dir / "summary.json", summary)
