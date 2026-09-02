@@ -47,3 +47,11 @@
 - 三族主中位数和 CI 上界均低于 10%，总状态为 `PASS / STRONG`；负值不作加速解释。
 - 108 个正式 pair 的 loss、梯度、模型参数和 optimizer 状态等价；两个观察条件的事件数与全局连续序号均通过 hard-fail。
 - writer 事件为 MoE 432、MoT 432、Latent 216，共 1,080 条；12 项正式证据 manifest 独立重算 0 mismatch。
+
+## Trainer 集成交叉验证准备
+
+- 新增独立的 `DetectionTrainer` 交叉验证层，不改动 108 对正式判据与结论。
+- 第一次 MoT 预检在训练前因官方源码快照没有 `.git` 元数据而 hard-fail；没有使用文件夹名冒充 commit 校验。
+- 修复为预注册并核对 Trainer、detect trainer、routing protocol 和三份模型 YAML 的 SHA-256；若运行目录未来带 `.git`，还会同时校验 commit/tree。
+- 第二次 MoT 预检完成 2 对 AB/BA、4 次真实 epoch。每次 2 个 batch、2 次 optimizer update；输入、loss、模型、optimizer 和 EMA 轨迹均等价，产生 16 条连续事件，dashboard HTTP smoke 通过。
+- 冻结三族正式交叉验证协议：每族 2 对 warmup + 6 对 measured；小样本数字只作描述，不替换正式开销结论。

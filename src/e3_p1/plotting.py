@@ -94,3 +94,40 @@ def save_strengthened_plot(families: dict[str, dict[str, Any]], path: Path, targ
     figure.suptitle("E3 P1 strengthened layered observer benchmark")
     figure.savefig(path, dpi=180)
     plt.close(figure)
+
+
+def save_engine_crosscheck_plot(families: dict[str, dict[str, Any]], path: Path, target_percent: float) -> None:
+    """Plot descriptive Trainer epoch-window pairs without making a new formal verdict."""
+
+    import matplotlib
+
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+
+    names = list(families)
+    x = np.arange(len(names))
+    figure, axes = plt.subplots(1, 2, figsize=(13.5, 5.4), constrained_layout=True)
+    values = [families[name]["epoch_window_slowdown_percent"]["values"] for name in names]
+    medians = [families[name]["epoch_window_slowdown_percent"]["median"] for name in names]
+    axes[0].boxplot(values, tick_labels=[name.upper() for name in names], showmeans=True)
+    for index, samples in enumerate(values, start=1):
+        axes[0].scatter(np.full(len(samples), index), samples, color="#2F6FAE", s=24, zorder=3)
+    axes[0].axhline(target_percent, color="#C83E4D", linestyle="--", label=f"P1 context: {target_percent:g}%")
+    axes[0].axhline(0.0, color="#61758A", linewidth=0.9)
+    axes[0].set_ylabel("Paired epoch-window slowdown (%)")
+    axes[0].set_title("Six Trainer pairs per family (descriptive)")
+    axes[0].grid(axis="y", color="#D8DEE6")
+    axes[0].legend()
+
+    event_counts = [families[name]["writer_event_count"] for name in names]
+    colors = ["#50A47B" if median < target_percent else "#C83E4D" for median in medians]
+    axes[1].bar(x, event_counts, color=colors)
+    axes[1].set_xticks(x, [name.upper() for name in names])
+    axes[1].set_ylabel("Trainer-generated JSONL events")
+    axes[1].set_title("Writer stream consumed by dashboard HTTP API")
+    axes[1].grid(axis="y", color="#D8DEE6")
+    for index, count in enumerate(event_counts):
+        axes[1].text(index, count, str(count), ha="center", va="bottom")
+    figure.suptitle("E3 P1 · real DetectionTrainer integration cross-check (not the formal verdict)")
+    figure.savefig(path, dpi=180)
+    plt.close(figure)

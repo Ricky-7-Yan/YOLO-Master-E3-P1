@@ -30,3 +30,9 @@
 加强 benchmark 独立于原 surrogate benchmark，避免事后改变已完成实验的口径。它把两个 batch 的 4 张 coco8 val 图片和真实标签预加载后，比较三个并行、初态相同的训练轨迹：关闭采集、内存采集、采集并写 JSONL。计时覆盖真实检测损失、反传、梯度裁剪、官方分组 SGD 更新以及可选 writer；模型/optimizer 哈希、schema 校验与绘图仍在计时外完成。
 
 六种条件排列解决三条件测试的位置偏差；事件 stream 在整个 family 内保留并强制验证全局连续序号。预检与正式状态通过 `formal_verdict_eligible` 分开，防止小样本诊断被误读为验收结果。完整预注册口径见 [`STRENGTHENED_PROTOCOL.md`](STRENGTHENED_PROTOCOL.md)。
+
+## Trainer 集成交叉验证层
+
+交叉验证不重新实现训练循环，而是通过官方 `DetectionTrainer` callbacks 装配观察器：`on_train_start` 注册、`on_train_batch_start` 注入样本上下文、事件产生时写 JSONL、`on_train_batch_end` flush、`teardown` 移除 hook。证据 harness 只覆写 checkpoint 保存方法，避免把权重序列化 I/O 混入观察器集成验证；dataloader、preprocess、检测 loss、backward、optimizer、EMA 和主训练回调顺序保持官方实现。
+
+同一 pair 的 off/on 独立构造 Trainer，但强制比较原始 collated batch、初始与最终模型、optimizer、EMA、loss 和 step 数；合并的三族事件随后交给现有 dashboard 的真实 HTTP server smoke。完整冻结口径见 [`ENGINE_CROSSCHECK_PROTOCOL.md`](ENGINE_CROSSCHECK_PROTOCOL.md)。
